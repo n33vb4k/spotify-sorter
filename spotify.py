@@ -14,6 +14,12 @@ itself in that same run (tracked in data/created_playlists.json).
 import base64, hashlib, http.server, json, os, secrets, sys, time, urllib.parse, urllib.request, webbrowser
 from urllib.error import HTTPError
 
+try:  # python.org macOS builds ship without CA certs; use certifi's bundle if present
+    import certifi
+    os.environ.setdefault("SSL_CERT_FILE", certifi.where())
+except ImportError:
+    pass
+
 REDIRECT = "http://127.0.0.1:8888/callback"
 SCOPES = ("user-library-read user-top-read user-read-recently-played "
           "playlist-read-private playlist-read-collaborative "
@@ -103,7 +109,10 @@ def api(method, path, body=None):
                 return json.loads(raw) if raw else {}
         except HTTPError as e:
             if e.code == 429:
-                time.sleep(int(e.headers.get("Retry-After", "2")) + 1); continue
+                wait = int(e.headers.get("Retry-After", "2"))
+                if wait > 120:
+                    raise RuntimeError(f"Spotify rate limit: try again in {wait // 3600}h{wait % 3600 // 60}m")
+                time.sleep(wait + 1); continue
             if e.code >= 500 and attempt < 5:
                 time.sleep(2); continue
             raise RuntimeError(f"{method} {url} -> {e.code}: {e.read().decode()[:300]}")

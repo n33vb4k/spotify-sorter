@@ -5,18 +5,30 @@ liked = {t['id']: t for t in json.load(open(os.path.join(spotify.DATA, 'liked.js
 def find(q):
     return [t for t in liked.values() if q.lower() in (', '.join(t['artists'])+' - '+t['name']).lower()][0]
 
+def _deezer(url):
+    return json.load(urllib.request.urlopen(url, timeout=15))
+
+
+def _clean(title):
+    return title.split(" - ")[0].split(" (feat")[0].split(" (with")[0].strip()
+
+
 def preview(t):
+    """Find the track's 30s preview on Deezer by artist + title and cache it."""
     path = os.path.join(PREV, t['id'] + '.mp3')
     if os.path.exists(path): return path
-    isrc = spotify.api('GET', '/tracks/' + t['id'])['external_ids']['isrc']
-    d = json.load(urllib.request.urlopen('https://api.deezer.com/track/isrc:' + isrc, timeout=10))
-    url = d.get('preview')
-    if not url:  # fall back to search
-        q = urllib.parse.quote(f'artist:"{t["artists"][0]}" track:"{t["name"].split(" - ")[0].split(" (")[0]}"')
-        s = json.load(urllib.request.urlopen('https://api.deezer.com/search?q=' + q, timeout=10))['data']
-        url = s[0]['preview'] if s else None
-    if not url: return None
-    urllib.request.urlretrieve(url, path); return path
+    artists = [x.lower() for x in t['artists']]
+    q = urllib.parse.quote(f'artist:"{t["artists"][0]}" track:"{_clean(t["name"])}"')
+    hits = _deezer('https://api.deezer.com/search?q=' + q).get('data', [])
+    if not hits:
+        hits = _deezer('https://api.deezer.com/search?q=' + urllib.parse.quote(f'{t["artists"][0]} {_clean(t["name"])}')).get('data', [])
+    hits = [h for h in hits if h.get('preview') and h['artist']['name'].lower() in artists] or \
+           [h for h in hits if h.get('preview') and any(a in h['title'].lower() or a in h['artist']['name'].lower() for a in artists)]
+    if not hits: return None
+    data = urllib.request.urlopen(hits[0]['preview'], timeout=30).read()
+    with open(path, 'wb') as f: f.write(data)
+    return path
+
 
 def feats(path):
     y, sr = librosa.load(path, sr=22050, mono=True)
