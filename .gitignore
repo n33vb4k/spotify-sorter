@@ -1,0 +1,11 @@
+# personal / secret
+config.json
+.token.json
+data/
+local/
+plan*.json
+# env
+.venv/
+__pycache__/
+.DS_Store
+models/
