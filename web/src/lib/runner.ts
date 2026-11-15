@@ -10,6 +10,17 @@ export interface Cached {
   tags?: Tags | null;
   error?: string;
   preview?: string | null;
+  /** When this result was saved (ms). */
+  at?: number;
+}
+
+const NO_PREVIEW_TTL = 7 * 24 * 3600 * 1000;
+
+/** Reuse saved tags forever (the audio doesn't change); retry "no preview" after a week in case Deezer adds one. */
+export function isReusable(c: Cached | undefined, now = Date.now()): boolean {
+  if (!c) return false;
+  if (c.tags) return true;
+  return c.error === "no preview" && typeof c.at === "number" && now - c.at < NO_PREVIEW_TTL;
 }
 
 export type RunEvent =
@@ -82,7 +93,7 @@ export class Runner {
     const todo: Track[] = [];
     for (const t of tracks) {
       const c = cached[t.id];
-      if (c && (c.tags || c.error === "no preview")) {
+      if (isReusable(c)) {
         done++;
         this.onEvent({ type: "track", track: { ...t, tags: c.tags, error: c.error }, done, total });
       } else todo.push(t);
@@ -115,7 +126,7 @@ export class Runner {
       if (prep.signal) result = await this.infer(t.id, prep.signal);
       if (result.tags === null) result = { error: "preview too short" };
       done++;
-      await cache.put<Cached>(t.id, result).catch(() => {});
+      await cache.put<Cached>(t.id, { ...result, at: Date.now() }).catch(() => {});
       this.onEvent({ type: "track", track: { ...t, ...result }, done, total });
     }
     this.onEvent({ type: "done" });

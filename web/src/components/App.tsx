@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { buildPlan, DEFAULT_RULES, finalPlaylists, type Plan, type TaggedTrack } from "@/lib/grouping";
 import { Runner } from "@/lib/runner";
+import { clearAll } from "@/lib/cache";
 import * as spotify from "@/lib/spotify";
 import { Icon } from "./Icon";
 import { ConnectPanel, CreatePanel, ListenPanel, Promise_, ScanPanel } from "./Panels";
@@ -25,6 +26,16 @@ interface Edits {
   names: Record<string, string>;
 }
 const NO_EDITS: Edits = { moves: {}, leftOut: {}, names: {} };
+const EDITS_KEY = "ss.edits";
+
+/** Your review edits are kept in this browser, so signing in again (a full page reload) doesn't lose them. */
+function loadEdits(): Edits {
+  try {
+    return { ...NO_EDITS, ...JSON.parse(localStorage.getItem(EDITS_KEY) ?? "{}") };
+  } catch {
+    return NO_EDITS;
+  }
+}
 
 /** Apply the user's edits on top of the computed plan, so new tags never wipe them. */
 function applyEdits(base: Plan, edits: Edits, order: string[]): Plan {
@@ -45,6 +56,8 @@ export default function App() {
   const [step, setStep] = useState<Step>("connect");
   const [demo, setDemo] = useState(false);
   const [connected, setConnected] = useState(false);
+  const [checking, setChecking] = useState(false);
+  const [accountName, setAccountName] = useState<string>();
   const [clientId, setClientIdState] = useState("");
   const [redirect, setRedirect] = useState("");
   const [connectError, setConnectError] = useState<string>();
@@ -52,6 +65,7 @@ export default function App() {
   const [library, setLibrary] = useState<TaggedTrack[]>([]);
   const [scan, setScan] = useState({ done: 0, total: 0, error: undefined as string | undefined, notRegistered: false });
   const [ownOpen, setOwnOpen] = useState(false);
+  const [forgotten, setForgotten] = useState(false);
   const [tagged, setTagged] = useState<Record<string, TaggedTrack>>({});
   const [recent, setRecent] = useState<TaggedTrack[]>([]);
   const [listen, setListen] = useState<{ done: number; status: "loading" | "running" | "done" | "stopped" | "error"; error?: string }>({ done: 0, status: "loading" });
@@ -69,7 +83,6 @@ export default function App() {
   useEffect(() => {
     setClientIdState(spotify.getClientId());
     setRedirect(spotify.redirectUri());
-    setConnected(spotify.isLoggedIn());
     const mq = window.matchMedia("(max-width: 900px)");
     setNarrow(mq.matches);
     const onMq = (e: MediaQueryListEvent) => setNarrow(e.matches);
@@ -80,9 +93,24 @@ export default function App() {
       .catch(() => {});
     const params = new URLSearchParams(window.location.search);
     if (params.get("error")) setConnectError(params.get("error")!);
-    if (params.get("step") === "scan" && spotify.isLoggedIn()) {
-      window.history.replaceState(null, "", "/");
-      startScan();
+    if (params.get("error")) window.history.replaceState(null, "", "/");
+    setEdits(loadEdits());
+    if (spotify.hasSavedSession()) {
+      setChecking(true);
+      spotify.checkSession().then((res) => {
+        setChecking(false);
+        if (res.ok) {
+          setConnected(true);
+          setAccountName(res.name);
+          if (params.get("step") === "scan") {
+            window.history.replaceState(null, "", "/");
+            startScan();
+          }
+        } else {
+          setConnected(false);
+          if (res.reason) setConnectError(res.reason);
+        }
+      });
     }
     return () => {
       mq.removeEventListener("change", onMq);
@@ -120,6 +148,21 @@ export default function App() {
 
   const selectedKey = selected && plan.playlists.some((p) => p.key === selected) ? selected : plan.playlists[0]?.key;
 
+  // Persist review edits (only for a real library; the demo's edits are throwaway).
+  useEffect(() => {
+    if (!demo && library.length) localStorage.setItem(EDITS_KEY, JSON.stringify(edits));
+  }, [edits, demo, library.length]);
+
+  /** Any call can find the sign-in has expired: drop back to Connect with a clear message. */
+  function handleExpired(e: unknown) {
+    if (!(e instanceof spotify.SessionExpiredError)) return false;
+    setConnected(false);
+    setAccountName(undefined);
+    setConnectError(e.message);
+    setStep("connect");
+    return true;
+  }
+
   function onTagged(t: TaggedTrack, done: number) {
     setTagged((prev) => ({ ...prev, [t.id]: t }));
     setRecent((prev) => [t, ...prev].slice(0, 8));
@@ -135,6 +178,7 @@ export default function App() {
       setLibrary(songs);
       startListen(songs);
     } catch (e) {
+      if (handleExpired(e)) return;
       setScan((s) => ({ ...s, error: (e as Error).message, notRegistered: e instanceof spotify.NotRegisteredError }));
     }
   }
@@ -216,7 +260,9 @@ export default function App() {
       await spotify.createPlaylists(final, "Sorted by how it sounds, with spotify-sorter.", (r) => setCreate((c) => ({ ...c, results: [...c.results, r] })));
       setCreate((c) => ({ ...c, busy: false }));
     } catch (e) {
-      setCreate((c) => ({ ...c, busy: false, error: (e as Error).message }));
+      setCreate((c) => ({ ...c, busy: false }));
+      if (handleExpired(e)) return;
+      setCreate((c) => ({ ...c, error: (e as Error).message }));
     }
   }
 
@@ -248,10 +294,16 @@ export default function App() {
   };
 
   const stage = (() => {
+    if (step === "connect" && checking)
+      return (
+        <div className="prose" role="status">
+          <p>Checking your Spotify sign-in…</p>
+        </div>
+      );
     if (step === "connect" && connected && !demo)
       return (
         <div className="prose">
-          <h2>Ready to sort your Liked Songs</h2>
+          <h2>{accountName ? `Connected as ${accountName}` : "Ready to sort your Liked Songs"}</h2>
           <Promise_ />
           <div className="row">
             <button className="btn primary" onClick={startScan}>
@@ -262,9 +314,22 @@ export default function App() {
               onClick={() => {
                 spotify.logout();
                 setConnected(false);
+                setAccountName(undefined);
               }}
             >
               Disconnect
+            </button>
+            <button
+              className="btn quiet"
+              onClick={async () => {
+                await clearAll();
+                localStorage.removeItem(EDITS_KEY);
+                setEdits(NO_EDITS);
+                setForgotten(true);
+              }}
+              disabled={forgotten}
+            >
+              {forgotten ? "Saved tags cleared" : "Clear saved tags"}
             </button>
           </div>
         </div>

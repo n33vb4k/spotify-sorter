@@ -61,3 +61,15 @@ describe("fixed colours", () => {
     expect(later["UK Garage"]).toEqual(first["UK Garage"]);
   });
 });
+
+import { isReusable } from "../src/lib/runner";
+describe("tag cache reuse", () => {
+  const day = 24 * 3600 * 1000;
+  it("reuses tags forever and 'no preview' for a week", () => {
+    expect(isReusable({ tags: { styles: [], moods: {} } }, 0)).toBe(true);
+    expect(isReusable({ error: "no preview", at: 0 }, 6 * day)).toBe(true);
+    expect(isReusable({ error: "no preview", at: 0 }, 8 * day)).toBe(false);
+    expect(isReusable({ error: "no preview" }, 0)).toBe(false); // old entries without a date get retried
+    expect(isReusable({ error: "preview lookup failed (502)", at: 0 }, 0)).toBe(false);
+  });
+});

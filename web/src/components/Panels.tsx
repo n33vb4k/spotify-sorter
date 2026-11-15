@@ -52,6 +52,11 @@ export function ConnectPanel({
   const uri = isLocalhost ? redirect.replace("//localhost", "//127.0.0.1") : redirect;
   return (
     <div className="prose">
+      {error && (
+        <p className="notice" role="alert">
+          {error}
+        </p>
+      )}
       <p>
         It plays the 30-second preview of every song you&apos;ve liked, works out its style (UK garage, bassline, trap, neo soul… 400 of them) and mood, then
         stacks them into playlists for you to check before anything is created.
@@ -72,11 +77,6 @@ export function ConnectPanel({
               Connect Spotify
             </button>
           </div>
-          {error && (
-            <p className="notice" role="alert">
-              {error}
-            </p>
-          )}
           <details className="own-app" open={ownOpen}>
             <summary>Not on their list? Use your own Spotify app</summary>
             {ownSteps()}
@@ -89,11 +89,6 @@ export function ConnectPanel({
             minutes, once.
           </p>
           {ownSteps()}
-          {error && (
-            <p className="notice" role="alert">
-              {error}
-            </p>
-          )}
         </>
       )}
     </div>
