@@ -1,0 +1,2201 @@
+{
+"note": "Sample library for demo mode; tags computed by ml/make_demo.py. Song names only, no audio.",
+"tracks": [
+{
+"id": "demo2db524e24f08f3dce1",
+"name": "Re-Rewind",
+"artists": [
+"Craig David",
+"Artful Dodger"
+],
+"uri": "spotify:track:demo2db524e24f08f3dce1",
+"tags": {
+"styles": [
+[
+"Hip Hop---Grime",
+0.386
+],
+[
+"Electronic---Grime",
+0.316
+],
+[
+"Electronic---UK Garage",
+0.209
+],
+[
+"Electronic---Dubstep",
+0.111
+],
+[
+"Electronic---Drum n Bass",
+0.099
+]
+],
+"moods": {
+"relaxed": 0.158,
+"aggressive": 0.269,
+"danceable": 0.999
+}
+}
+},
+{
+"id": "demo0be5fec51dfc7fbfa0",
+"name": "Sincere",
+"artists": [
+"MJ Cole"
+],
+"uri": "spotify:track:demo0be5fec51dfc7fbfa0",
+"tags": {
+"styles": [
+[
+"Electronic---UK Garage",
+0.979
+],
+[
+"Electronic---Speed Garage",
+0.769
+],
+[
+"Electronic---House",
+0.661
+],
+[
+"Electronic---Garage House",
+0.529
+],
+[
+"Electronic---Broken Beat",
+0.335
+]
+],
+"moods": {
+"relaxed": 0.118,
+"aggressive": 0.004,
+"danceable": 1.0
+}
+}
+},
+{
+"id": "demo60ccdc646eb18895c7",
+"name": "Flowers",
+"artists": [
+"Sweet Female Attitude"
+],
+"uri": "spotify:track:demo60ccdc646eb18895c7",
+"tags": {
+"styles": [
+[
+"Electronic---UK Garage",
+0.909
+],
+[
+"Electronic---House",
+0.331
+],
+[
+"Electronic---Bassline",
+0.205
+],
+[
+"Electronic---Speed Garage",
+0.169
+],
+[
+"Electronic---Garage House",
+0.146
+]
+],
+"moods": {
+"relaxed": 0.192,
+"aggressive": 0.004,
+"danceable": 1.0
+}
+}
+},
+{
+"id": "demo2d9f22a94f555dc6bd",
+"name": "A Little Bit of Luck",
+"artists": [
+"DJ Luck & MC Neat"
+],
+"uri": "spotify:track:demo2d9f22a94f555dc6bd",
+"tags": {
+"styles": [
+[
+"Electronic---UK Garage",
+0.661
+],
+[
+"Electronic---House",
+0.373
+],
+[
+"Electronic---Bassline",
+0.114
+],
+[
+"Electronic---Speed Garage",
+0.113
+],
+[
+"Electronic---Breakbeat",
+0.081
+]
+],
+"moods": {
+"relaxed": 0.14,
+"aggressive": 0.007,
+"danceable": 1.0
+}
+}
+},
+{
+"id": "demoa833ef6460e59cc8d4",
+"name": "Sweet Like Chocolate",
+"artists": [
+"Shanks & Bigfoot"
+],
+"uri": "spotify:track:demoa833ef6460e59cc8d4",
+"tags": {
+"styles": [
+[
+"Electronic---UK Garage",
+0.646
+],
+[
+"Electronic---Speed Garage",
+0.413
+],
+[
+"Electronic---House",
+0.3
+],
+[
+"Electronic---Broken Beat",
+0.193
+],
+[
+"Electronic---Garage House",
+0.176
+]
+],
+"moods": {
+"relaxed": 0.353,
+"aggressive": 0.01,
+"danceable": 0.998
+}
+}
+},
+{
+"id": "democ647dbcd0b76c89df4",
+"name": "21 Seconds",
+"artists": [
+"So Solid Crew"
+],
+"uri": "spotify:track:democ647dbcd0b76c89df4",
+"tags": {
+"styles": [
+[
+"Hip Hop---Grime",
+0.363
+],
+[
+"Electronic---Grime",
+0.162
+],
+[
+"Hip Hop---Boom Bap",
+0.155
+],
+[
+"Hip Hop---Conscious",
+0.13
+],
+[
+"Hip Hop---Trap",
+0.093
+]
+],
+"moods": {
+"relaxed": 0.412,
+"aggressive": 0.028,
+"danceable": 1.0
+}
+}
+},
+{
+"id": "demo23b334053d5aec86d8",
+"name": "You Wot!",
+"artists": [
+"DJ Q"
+],
+"uri": "spotify:track:demo23b334053d5aec86d8",
+"tags": {
+"styles": [
+[
+"Hip Hop---Grime",
+0.48
+],
+[
+"Electronic---Grime",
+0.452
+],
+[
+"Electronic---UK Garage",
+0.417
+],
+[
+"Electronic---Bassline",
+0.4
+],
+[
+"Electronic---Dubstep",
+0.176
+]
+],
+"moods": {
+"relaxed": 0.045,
+"aggressive": 0.363,
+"danceable": 1.0
+}
+}
+},
+{
+"id": "demo00c872beed851c864a",
+"name": "Heartbroken",
+"artists": [
+"T2"
+],
+"uri": "spotify:track:demo00c872beed851c864a",
+"tags": {
+"styles": [
+[
+"Electronic---UK Garage",
+0.649
+],
+[
+"Electronic---Speed Garage",
+0.6
+],
+[
+"Electronic---Bassline",
+0.251
+],
+[
+"Electronic---Garage House",
+0.096
+],
+[
+"Electronic---House",
+0.076
+]
+],
+"moods": {
+"relaxed": 0.273,
+"aggressive": 0.022,
+"danceable": 0.999
+}
+}
+},
+{
+"id": "demo8618c698149f46c14b",
+"name": "True",
+"artists": [
+"Jaimeson"
+],
+"uri": "spotify:track:demo8618c698149f46c14b",
+"tags": {
+"styles": [
+[
+"Electronic---Speed Garage",
+0.495
+],
+[
+"Electronic---UK Garage",
+0.293
+],
+[
+"Electronic---House",
+0.173
+],
+[
+"Electronic---Garage House",
+0.074
+],
+[
+"Folk, World, & Country---Folk",
+0.057
+]
+],
+"moods": {
+"relaxed": 0.378,
+"aggressive": 0.089,
+"danceable": 0.948
+}
+}
+},
+{
+"id": "demo632d7a7813d6f6c010",
+"name": "Watercolour",
+"artists": [
+"Pendulum"
+],
+"uri": "spotify:track:demo632d7a7813d6f6c010",
+"tags": {
+"styles": [
+[
+"Rock---Alternative Rock",
+0.128
+],
+[
+"Rock---Heavy Metal",
+0.096
+],
+[
+"Rock---Pop Rock",
+0.076
+],
+[
+"Rock---Power Metal",
+0.061
+],
+[
+"Folk, World, & Country---Gospel",
+0.059
+]
+],
+"moods": {
+"relaxed": 0.655,
+"aggressive": 0.201,
+"danceable": 0.451
+}
+}
+},
+{
+"id": "demo9e27c6527cd68c933e",
+"name": "Rock It",
+"artists": [
+"Sub Focus"
+],
+"uri": "spotify:track:demo9e27c6527cd68c933e",
+"tags": {
+"styles": [
+[
+"Electronic---Dubstep",
+0.254
+],
+[
+"Electronic---Glitch",
+0.205
+],
+[
+"Electronic---Electro",
+0.169
+],
+[
+"Electronic---Drum n Bass",
+0.123
+],
+[
+"Electronic---Chiptune",
+0.091
+]
+],
+"moods": {
+"relaxed": 0.197,
+"aggressive": 0.633,
+"danceable": 0.997
+}
+}
+},
+{
+"id": "demofb42c1f807e1c11051",
+"name": "Brown Paper Bag",
+"artists": [
+"Roni Size"
+],
+"uri": "spotify:track:demofb42c1f807e1c11051",
+"tags": {
+"styles": [
+[
+"Electronic---Drum n Bass",
+0.24
+],
+[
+"Electronic---Downtempo",
+0.172
+],
+[
+"Electronic---Trip Hop",
+0.117
+],
+[
+"Electronic---IDM",
+0.089
+],
+[
+"Electronic---Experimental",
+0.085
+]
+],
+"moods": {
+"relaxed": 0.52,
+"aggressive": 0.076,
+"danceable": 0.993
+}
+}
+},
+{
+"id": "demod41cc71f99f8bafb52",
+"name": "Inner City Life",
+"artists": [
+"Goldie"
+],
+"uri": "spotify:track:demod41cc71f99f8bafb52",
+"tags": {
+"styles": [
+[
+"Electronic---Jungle",
+0.868
+],
+[
+"Electronic---Drum n Bass",
+0.405
+],
+[
+"Electronic---Juke",
+0.283
+],
+[
+"Electronic---Hardcore",
+0.128
+],
+[
+"Electronic---Breakbeat",
+0.12
+]
+],
+"moods": {
+"relaxed": 0.292,
+"aggressive": 0.126,
+"danceable": 1.0
+}
+}
+},
+{
+"id": "demoe5cbea0536fc0be2d0",
+"name": "Come Alive",
+"artists": [
+"Netsky"
+],
+"uri": "spotify:track:demoe5cbea0536fc0be2d0",
+"tags": {
+"styles": [
+[
+"Electronic---Ambient",
+0.168
+],
+[
+"Children's---Nursery Rhymes",
+0.088
+],
+[
+"Electronic---Chillwave",
+0.086
+],
+[
+"Electronic---Downtempo",
+0.083
+],
+[
+"Hip Hop---Trap",
+0.083
+]
+],
+"moods": {
+"relaxed": 0.72,
+"aggressive": 0.185,
+"danceable": 0.947
+}
+}
+},
+{
+"id": "demoa209a6282c3c38be53",
+"name": "Shake Ur Body",
+"artists": [
+"Shy FX",
+"T Power"
+],
+"uri": "spotify:track:demoa209a6282c3c38be53",
+"tags": {
+"styles": [
+[
+"Electronic---Drum n Bass",
+0.476
+],
+[
+"Electronic---Jungle",
+0.28
+],
+[
+"Electronic---Breakcore",
+0.129
+],
+[
+"Electronic---Breakbeat",
+0.118
+],
+[
+"Electronic---Happy Hardcore",
+0.089
+]
+],
+"moods": {
+"relaxed": 0.233,
+"aggressive": 0.429,
+"danceable": 0.998
+}
+}
+},
+{
+"id": "demo535123cb37ab9b9736",
+"name": "Around the World",
+"artists": [
+"Daft Punk"
+],
+"uri": "spotify:track:demo535123cb37ab9b9736",
+"tags": {
+"styles": [
+[
+"Electronic---House",
+0.433
+],
+[
+"Electronic---Disco",
+0.22
+],
+[
+"Electronic---Synth-pop",
+0.174
+],
+[
+"Electronic---Electro",
+0.168
+],
+[
+"Electronic---Nu-Disco",
+0.152
+]
+],
+"moods": {
+"relaxed": 0.125,
+"aggressive": 0.107,
+"danceable": 1.0
+}
+}
+},
+{
+"id": "demo6917c21f882907726d",
+"name": "Losing It",
+"artists": [
+"FISHER"
+],
+"uri": "spotify:track:demo6917c21f882907726d",
+"tags": {
+"styles": [
+[
+"Electronic---Tropical House",
+0.567
+],
+[
+"Electronic---Deep House",
+0.505
+],
+[
+"Electronic---House",
+0.361
+],
+[
+"Electronic---Tech House",
+0.256
+],
+[
+"Electronic---Progressive House",
+0.139
+]
+],
+"moods": {
+"relaxed": 0.466,
+"aggressive": 0.041,
+"danceable": 1.0
+}
+}
+},
+{
+"id": "demobf6087de9861e22483",
+"name": "Music Sounds Better With You",
+"artists": [
+"Stardust"
+],
+"uri": "spotify:track:demobf6087de9861e22483",
+"tags": {
+"styles": [
+[
+"Electronic---House",
+0.774
+],
+[
+"Electronic---Nu-Disco",
+0.394
+],
+[
+"Electronic---Deep House",
+0.334
+],
+[
+"Electronic---Disco",
+0.238
+],
+[
+"Electronic---Tropical House",
+0.191
+]
+],
+"moods": {
+"relaxed": 0.045,
+"aggressive": 0.026,
+"danceable": 1.0
+}
+}
+},
+{
+"id": "demo8ba50a9fb3b27ae753",
+"name": "Show Me Love",
+"artists": [
+"Robin S"
+],
+"uri": "spotify:track:demo8ba50a9fb3b27ae753",
+"tags": {
+"styles": [
+[
+"Electronic---House",
+0.685
+],
+[
+"Electronic---Italo House",
+0.362
+],
+[
+"Electronic---Deep House",
+0.285
+],
+[
+"Electronic---Garage House",
+0.17
+],
+[
+"Electronic---Euro House",
+0.164
+]
+],
+"moods": {
+"relaxed": 0.213,
+"aggressive": 0.008,
+"danceable": 1.0
+}
+}
+},
+{
+"id": "demo1a22746d6cc6689a94",
+"name": "(It Goes Like) Nanana",
+"artists": [
+"Peggy Gou"
+],
+"uri": "spotify:track:demo1a22746d6cc6689a94",
+"tags": {
+"styles": [
+[
+"Electronic---House",
+0.574
+],
+[
+"Electronic---Euro House",
+0.422
+],
+[
+"Electronic---Eurodance",
+0.166
+],
+[
+"Electronic---Italodance",
+0.161
+],
+[
+"Electronic---Progressive House",
+0.094
+]
+],
+"moods": {
+"relaxed": 0.106,
+"aggressive": 0.054,
+"danceable": 1.0
+}
+}
+},
+{
+"id": "demo5eeb2609f51f52eb76",
+"name": "Midnight Request Line",
+"artists": [
+"Skream"
+],
+"uri": "spotify:track:demo5eeb2609f51f52eb76",
+"tags": {
+"styles": [
+[
+"Electronic---Goa Trance",
+0.141
+],
+[
+"Electronic---Trance",
+0.127
+],
+[
+"Electronic---House",
+0.09
+],
+[
+"Electronic---Techno",
+0.079
+],
+[
+"Electronic---Psy-Trance",
+0.066
+]
+],
+"moods": {
+"relaxed": 0.432,
+"aggressive": 0.285,
+"danceable": 0.92
+}
+}
+},
+{
+"id": "demo136e4a5b1c0bfe8b70",
+"name": "Night",
+"artists": [
+"Benga"
+],
+"uri": "spotify:track:demo136e4a5b1c0bfe8b70",
+"tags": {
+"styles": [
+[
+"Electronic---Halftime",
+0.279
+],
+[
+"Electronic---Drum n Bass",
+0.269
+],
+[
+"Electronic---Experimental",
+0.124
+],
+[
+"Electronic---Techno",
+0.119
+],
+[
+"Electronic---Dubstep",
+0.102
+]
+],
+"moods": {
+"relaxed": 0.663,
+"aggressive": 0.45,
+"danceable": 0.984
+}
+}
+},
+{
+"id": "demof59ab9da9f7d4987fa",
+"name": "Woo Boost",
+"artists": [
+"Rusko"
+],
+"uri": "spotify:track:demof59ab9da9f7d4987fa",
+"tags": {
+"styles": [
+[
+"Electronic---Dubstep",
+0.435
+],
+[
+"Electronic---Grime",
+0.146
+],
+[
+"Electronic---Breakcore",
+0.144
+],
+[
+"Electronic---Glitch",
+0.108
+],
+[
+"Electronic---Chiptune",
+0.088
+]
+],
+"moods": {
+"relaxed": 0.124,
+"aggressive": 0.858,
+"danceable": 0.999
+}
+}
+},
+{
+"id": "demo2866e7b5e9c1183044",
+"name": "N.Y. State of Mind",
+"artists": [
+"Nas"
+],
+"uri": "spotify:track:demo2866e7b5e9c1183044",
+"tags": {
+"styles": [
+[
+"Hip Hop---Hardcore Hip-Hop",
+0.439
+],
+[
+"Hip Hop---Boom Bap",
+0.406
+],
+[
+"Hip Hop---Conscious",
+0.314
+],
+[
+"Hip Hop---Jazzy Hip-Hop",
+0.239
+],
+[
+"Hip Hop---Horrorcore",
+0.171
+]
+],
+"moods": {
+"relaxed": 0.414,
+"aggressive": 0.049,
+"danceable": 1.0
+}
+}
+},
+{
+"id": "demod5d799a0f7cba53018",
+"name": "Can I Kick It?",
+"artists": [
+"A Tribe Called Quest"
+],
+"uri": "spotify:track:demod5d799a0f7cba53018",
+"tags": {
+"styles": [
+[
+"Hip Hop---Conscious",
+0.289
+],
+[
+"Hip Hop---Boom Bap",
+0.149
+],
+[
+"Hip Hop---Hardcore Hip-Hop",
+0.143
+],
+[
+"Hip Hop---Jazzy Hip-Hop",
+0.111
+],
+[
+"Hip Hop---Instrumental",
+0.11
+]
+],
+"moods": {
+"relaxed": 0.402,
+"aggressive": 0.047,
+"danceable": 1.0
+}
+}
+},
+{
+"id": "democa34c0dfe0de3b5a18",
+"name": "C.R.E.A.M.",
+"artists": [
+"Wu-Tang Clan"
+],
+"uri": "spotify:track:democa34c0dfe0de3b5a18",
+"tags": {
+"styles": [
+[
+"Rock---Goregrind",
+0.474
+],
+[
+"Rock---Pornogrind",
+0.406
+],
+[
+"Hip Hop---Boom Bap",
+0.244
+],
+[
+"Hip Hop---Jazzy Hip-Hop",
+0.124
+],
+[
+"Hip Hop---Conscious",
+0.104
+]
+],
+"moods": {
+"relaxed": 0.659,
+"aggressive": 0.03,
+"danceable": 0.996
+}
+}
+},
+{
+"id": "demoaf5bf713ef906a6298",
+"name": "Still D.R.E.",
+"artists": [
+"Dr. Dre",
+"Snoop Dogg"
+],
+"uri": "spotify:track:demoaf5bf713ef906a6298",
+"tags": {
+"styles": [
+[
+"Hip Hop---Horrorcore",
+0.215
+],
+[
+"Hip Hop---Instrumental",
+0.195
+],
+[
+"Hip Hop---Boom Bap",
+0.179
+],
+[
+"Hip Hop---Conscious",
+0.158
+],
+[
+"Hip Hop---Hardcore Hip-Hop",
+0.148
+]
+],
+"moods": {
+"relaxed": 0.314,
+"aggressive": 0.058,
+"danceable": 1.0
+}
+}
+},
+{
+"id": "democ6f1dac9b9c7ab0fd1",
+"name": "Bad and Boujee",
+"artists": [
+"Migos"
+],
+"uri": "spotify:track:democ6f1dac9b9c7ab0fd1",
+"tags": {
+"styles": [
+[
+"Hip Hop---Trap",
+0.619
+],
+[
+"Hip Hop---Cloud Rap",
+0.588
+],
+[
+"Hip Hop---Pop Rap",
+0.326
+],
+[
+"Hip Hop---Grime",
+0.1
+],
+[
+"Hip Hop---Thug Rap",
+0.056
+]
+],
+"moods": {
+"relaxed": 0.499,
+"aggressive": 0.169,
+"danceable": 0.996
+}
+}
+},
+{
+"id": "demo66549c74bffb3ab4b8",
+"name": "SICKO MODE",
+"artists": [
+"Travis Scott"
+],
+"uri": "spotify:track:demo66549c74bffb3ab4b8",
+"tags": {
+"styles": [
+[
+"Hip Hop---Trap",
+0.338
+],
+[
+"Hip Hop---Gangsta",
+0.175
+],
+[
+"Hip Hop---Cloud Rap",
+0.126
+],
+[
+"Hip Hop---Conscious",
+0.118
+],
+[
+"Hip Hop---Pop Rap",
+0.095
+]
+],
+"moods": {
+"relaxed": 0.356,
+"aggressive": 0.524,
+"danceable": 0.997
+}
+}
+},
+{
+"id": "demo9e258ba3b1be485a1d",
+"name": "Mask Off",
+"artists": [
+"Future"
+],
+"uri": "spotify:track:demo9e258ba3b1be485a1d",
+"tags": {
+"styles": [
+[
+"Hip Hop---Trap",
+0.774
+],
+[
+"Hip Hop---Cloud Rap",
+0.448
+],
+[
+"Hip Hop---Pop Rap",
+0.319
+],
+[
+"Hip Hop---Crunk",
+0.267
+],
+[
+"Hip Hop---Gangsta",
+0.259
+]
+],
+"moods": {
+"relaxed": 0.639,
+"aggressive": 0.033,
+"danceable": 0.996
+}
+}
+},
+{
+"id": "democ9aabcb4ab83f07c89",
+"name": "Wearing My Rolex",
+"artists": [
+"Wiley"
+],
+"uri": "spotify:track:democ9aabcb4ab83f07c89",
+"tags": {
+"styles": [
+[
+"Electronic---House",
+0.323
+],
+[
+"Electronic---Electro",
+0.161
+],
+[
+"Electronic---Grime",
+0.142
+],
+[
+"Electronic---Euro House",
+0.136
+],
+[
+"Hip Hop---Grime",
+0.128
+]
+],
+"moods": {
+"relaxed": 0.021,
+"aggressive": 0.418,
+"danceable": 1.0
+}
+}
+},
+{
+"id": "demo1e6663b99ffc420b6f",
+"name": "Shut Up",
+"artists": [
+"Stormzy"
+],
+"uri": "spotify:track:demo1e6663b99ffc420b6f",
+"tags": {
+"styles": [
+[
+"Hip Hop---Grime",
+0.695
+],
+[
+"Electronic---Grime",
+0.544
+],
+[
+"Hip Hop---Trap",
+0.082
+],
+[
+"Hip Hop---Conscious",
+0.06
+],
+[
+"Hip Hop---Boom Bap",
+0.052
+]
+],
+"moods": {
+"relaxed": 0.716,
+"aggressive": 0.033,
+"danceable": 0.975
+}
+}
+},
+{
+"id": "demod6153a2eb75f2bcd03",
+"name": "Fix Up, Look Sharp",
+"artists": [
+"Dizzee Rascal"
+],
+"uri": "spotify:track:demod6153a2eb75f2bcd03",
+"tags": {
+"styles": [
+[
+"Hip Hop---Grime",
+0.757
+],
+[
+"Electronic---Grime",
+0.641
+],
+[
+"Electronic---Breakbeat",
+0.091
+],
+[
+"Electronic---Hip Hop",
+0.066
+],
+[
+"Hip Hop---Horrorcore",
+0.047
+]
+],
+"moods": {
+"relaxed": 0.044,
+"aggressive": 0.872,
+"danceable": 0.997
+}
+}
+},
+{
+"id": "demoea545df51af53b5cb7",
+"name": "P's and Q's",
+"artists": [
+"Kano"
+],
+"uri": "spotify:track:demoea545df51af53b5cb7",
+"tags": {
+"styles": [
+[
+"Hip Hop---Grime",
+0.501
+],
+[
+"Electronic---Grime",
+0.327
+],
+[
+"Electronic---Dubstep",
+0.103
+],
+[
+"Hip Hop---Ragga HipHop",
+0.071
+],
+[
+"Hip Hop---Gangsta",
+0.067
+]
+],
+"moods": {
+"relaxed": 0.599,
+"aggressive": 0.069,
+"danceable": 0.998
+}
+}
+},
+{
+"id": "demo2a3e97778807f4accd",
+"name": "Thinkin Bout You",
+"artists": [
+"Frank Ocean"
+],
+"uri": "spotify:track:demo2a3e97778807f4accd",
+"tags": {
+"styles": [
+[
+"Electronic---Ambient",
+0.401
+],
+[
+"Electronic---Downtempo",
+0.234
+],
+[
+"Electronic---Chillwave",
+0.123
+],
+[
+"Electronic---Experimental",
+0.11
+],
+[
+"Electronic---Dub Techno",
+0.078
+]
+],
+"moods": {
+"relaxed": 0.975,
+"aggressive": 0.012,
+"danceable": 0.932
+}
+}
+},
+{
+"id": "demoa4aa288c0324ef8de3",
+"name": "Back to Black",
+"artists": [
+"Amy Winehouse"
+],
+"uri": "spotify:track:demoa4aa288c0324ef8de3",
+"tags": {
+"styles": [
+[
+"Rock---Indie Rock",
+0.195
+],
+[
+"Electronic---Downtempo",
+0.148
+],
+[
+"Rock---Alternative Rock",
+0.135
+],
+[
+"Rock---Pop Rock",
+0.109
+],
+[
+"Funk / Soul---Neo Soul",
+0.076
+]
+],
+"moods": {
+"relaxed": 0.809,
+"aggressive": 0.002,
+"danceable": 0.472
+}
+}
+},
+{
+"id": "democ838b408388c2f5ca0",
+"name": "Untitled (How Does It Feel)",
+"artists": [
+"D'Angelo"
+],
+"uri": "spotify:track:democ838b408388c2f5ca0",
+"tags": {
+"styles": [
+[
+"Funk / Soul---Neo Soul",
+0.673
+],
+[
+"Funk / Soul---Contemporary R&B",
+0.413
+],
+[
+"Hip Hop---RnB/Swing",
+0.385
+],
+[
+"Funk / Soul---Soul",
+0.375
+],
+[
+"Funk / Soul---Rhythm & Blues",
+0.119
+]
+],
+"moods": {
+"relaxed": 0.948,
+"aggressive": 0.001,
+"danceable": 0.895
+}
+}
+},
+{
+"id": "demo0cff509b50b45baf73",
+"name": "Good Days",
+"artists": [
+"SZA"
+],
+"uri": "spotify:track:demo0cff509b50b45baf73",
+"tags": {
+"styles": [
+[
+"Pop---Ballad",
+0.154
+],
+[
+"Pop---Vocal",
+0.073
+],
+[
+"Pop---Indie Pop",
+0.065
+],
+[
+"Pop---K-pop",
+0.057
+],
+[
+"Latin---Reggaeton",
+0.056
+]
+],
+"moods": {
+"relaxed": 0.874,
+"aggressive": 0.009,
+"danceable": 0.952
+}
+}
+},
+{
+"id": "demof9b3b9a91368af0afc",
+"name": "Kerala",
+"artists": [
+"Bonobo"
+],
+"uri": "spotify:track:demof9b3b9a91368af0afc",
+"tags": {
+"styles": [
+[
+"Electronic---Deep House",
+0.214
+],
+[
+"Electronic---Downtempo",
+0.21
+],
+[
+"Electronic---Techno",
+0.202
+],
+[
+"Electronic---Experimental",
+0.164
+],
+[
+"Electronic---House",
+0.154
+]
+],
+"moods": {
+"relaxed": 0.814,
+"aggressive": 0.019,
+"danceable": 0.996
+}
+}
+},
+{
+"id": "demo7908ec481e671d97ec",
+"name": "Teardrop",
+"artists": [
+"Massive Attack"
+],
+"uri": "spotify:track:demo7908ec481e671d97ec",
+"tags": {
+"styles": [
+[
+"Electronic---Downtempo",
+0.256
+],
+[
+"Electronic---Trip Hop",
+0.232
+],
+[
+"Hip Hop---Instrumental",
+0.208
+],
+[
+"Hip Hop---Trip Hop",
+0.204
+],
+[
+"Funk / Soul---Neo Soul",
+0.08
+]
+],
+"moods": {
+"relaxed": 0.975,
+"aggressive": 0.004,
+"danceable": 0.829
+}
+}
+},
+{
+"id": "demo5d48f9b80b665fb6bc",
+"name": "The Less I Know The Better",
+"artists": [
+"Tame Impala"
+],
+"uri": "spotify:track:demo5d48f9b80b665fb6bc",
+"tags": {
+"styles": [
+[
+"Pop---K-pop",
+0.231
+],
+[
+"Electronic---Electro",
+0.161
+],
+[
+"Pop---Indie Pop",
+0.109
+],
+[
+"Electronic---Synth-pop",
+0.098
+],
+[
+"Funk / Soul---Neo Soul",
+0.073
+]
+],
+"moods": {
+"relaxed": 0.39,
+"aggressive": 0.038,
+"danceable": 0.993
+}
+}
+},
+{
+"id": "demo4f9754417aaf79e0be",
+"name": "Maria También",
+"artists": [
+"Khruangbin"
+],
+"uri": "spotify:track:demo4f9754417aaf79e0be",
+"tags": {
+"styles": [
+[
+"Electronic---Downtempo",
+0.164
+],
+[
+"Reggae---Dub",
+0.151
+],
+[
+"Electronic---Trip Hop",
+0.141
+],
+[
+"Funk / Soul---Funk",
+0.108
+],
+[
+"Reggae---Reggae",
+0.083
+]
+],
+"moods": {
+"relaxed": 0.37,
+"aggressive": 0.075,
+"danceable": 0.98
+}
+}
+},
+{
+"id": "demofa0c90c820b353071e",
+"name": "Glory Box",
+"artists": [
+"Portishead"
+],
+"uri": "spotify:track:demofa0c90c820b353071e",
+"tags": {
+"styles": [
+[
+"Electronic---Downtempo",
+0.315
+],
+[
+"Hip Hop---Instrumental",
+0.265
+],
+[
+"Hip Hop---Trip Hop",
+0.24
+],
+[
+"Electronic---Trip Hop",
+0.187
+],
+[
+"Electronic---Ambient",
+0.121
+]
+],
+"moods": {
+"relaxed": 0.899,
+"aggressive": 0.04,
+"danceable": 0.978
+}
+}
+},
+{
+"id": "demo449987aa4da2796b77",
+"name": "Do I Wanna Know?",
+"artists": [
+"Arctic Monkeys"
+],
+"uri": "spotify:track:demo449987aa4da2796b77",
+"tags": {
+"styles": [
+[
+"Rock---Alternative Rock",
+0.146
+],
+[
+"Rock---Indie Rock",
+0.138
+],
+[
+"Rock---Pop Rock",
+0.061
+],
+[
+"Blues---Modern Electric Blues",
+0.05
+],
+[
+"Pop---Indie Pop",
+0.045
+]
+],
+"moods": {
+"relaxed": 0.653,
+"aggressive": 0.039,
+"danceable": 0.491
+}
+}
+},
+{
+"id": "demo9fe4736ec51ffcd8ab",
+"name": "Last Nite",
+"artists": [
+"The Strokes"
+],
+"uri": "spotify:track:demo9fe4736ec51ffcd8ab",
+"tags": {
+"styles": [
+[
+"Rock---Punk",
+0.469
+],
+[
+"Rock---Indie Rock",
+0.231
+],
+[
+"Rock---Alternative Rock",
+0.173
+],
+[
+"Rock---Emo",
+0.114
+],
+[
+"Rock---Ska",
+0.107
+]
+],
+"moods": {
+"relaxed": 0.045,
+"aggressive": 0.943,
+"danceable": 0.8
+}
+}
+},
+{
+"id": "demo795bfaa5881c83d6fa",
+"name": "Wonderwall",
+"artists": [
+"Oasis"
+],
+"uri": "spotify:track:demo795bfaa5881c83d6fa",
+"tags": {
+"styles": [
+[
+"Rock---Alternative Rock",
+0.221
+],
+[
+"Rock---Punk",
+0.215
+],
+[
+"Rock---Indie Rock",
+0.173
+],
+[
+"Rock---Pop Punk",
+0.139
+],
+[
+"Rock---Acoustic",
+0.106
+]
+],
+"moods": {
+"relaxed": 0.631,
+"aggressive": 0.055,
+"danceable": 0.375
+}
+}
+},
+{
+"id": "demo90af6c2ba1e647e7d6",
+"name": "Smells Like Teen Spirit",
+"artists": [
+"Nirvana"
+],
+"uri": "spotify:track:demo90af6c2ba1e647e7d6",
+"tags": {
+"styles": [
+[
+"Rock---Alternative Rock",
+0.473
+],
+[
+"Rock---Indie Rock",
+0.196
+],
+[
+"Rock---Nu Metal",
+0.173
+],
+[
+"Rock---Brit Pop",
+0.136
+],
+[
+"Rock---Industrial",
+0.116
+]
+],
+"moods": {
+"relaxed": 0.031,
+"aggressive": 0.911,
+"danceable": 0.699
+}
+}
+},
+{
+"id": "demo6851f31aaa16112e04",
+"name": "Levitating",
+"artists": [
+"Dua Lipa"
+],
+"uri": "spotify:track:demo6851f31aaa16112e04",
+"tags": {
+"styles": [
+[
+"Pop---K-pop",
+0.355
+],
+[
+"Electronic---Dance-pop",
+0.125
+],
+[
+"Electronic---House",
+0.077
+],
+[
+"Hip Hop---RnB/Swing",
+0.075
+],
+[
+"Electronic---Tropical House",
+0.06
+]
+],
+"moods": {
+"relaxed": 0.458,
+"aggressive": 0.01,
+"danceable": 0.917
+}
+}
+},
+{
+"id": "demo2d216b8c5e9b118174",
+"name": "As It Was",
+"artists": [
+"Harry Styles"
+],
+"uri": "spotify:track:demo2d216b8c5e9b118174",
+"tags": {
+"styles": [
+[
+"Rock---Indie Rock",
+0.408
+],
+[
+"Rock---Alternative Rock",
+0.289
+],
+[
+"Rock---Dream Pop",
+0.227
+],
+[
+"Pop---Indie Pop",
+0.103
+],
+[
+"Rock---Post-Punk",
+0.098
+]
+],
+"moods": {
+"relaxed": 0.61,
+"aggressive": 0.156,
+"danceable": 0.883
+}
+}
+},
+{
+"id": "demof3d6da4cb461d0735e",
+"name": "Blinding Lights",
+"artists": [
+"The Weeknd"
+],
+"uri": "spotify:track:demof3d6da4cb461d0735e",
+"tags": {
+"styles": [
+[
+"Electronic---Synth-pop",
+0.22
+],
+[
+"Electronic---Electro",
+0.119
+],
+[
+"Electronic---Drum n Bass",
+0.114
+],
+[
+"Electronic---Synthwave",
+0.071
+],
+[
+"Electronic---House",
+0.068
+]
+],
+"moods": {
+"relaxed": 0.25,
+"aggressive": 0.17,
+"danceable": 0.999
+}
+}
+},
+{
+"id": "demo664f02476a23c746e5",
+"name": "Is This Love",
+"artists": [
+"Bob Marley & The Wailers"
+],
+"uri": "spotify:track:demo664f02476a23c746e5",
+"tags": {
+"styles": [
+[
+"Reggae---Roots Reggae",
+0.704
+],
+[
+"Reggae---Lovers Rock",
+0.581
+],
+[
+"Reggae---Reggae",
+0.468
+],
+[
+"Reggae---Dub",
+0.462
+],
+[
+"Reggae---Reggae-Pop",
+0.141
+]
+],
+"moods": {
+"relaxed": 0.559,
+"aggressive": 0.001,
+"danceable": 0.924
+}
+}
+},
+{
+"id": "demo28662d1fe7add33916",
+"name": "Temperature",
+"artists": [
+"Sean Paul"
+],
+"uri": "spotify:track:demo28662d1fe7add33916",
+"tags": {
+"styles": [
+[
+"Electronic---House",
+0.301
+],
+[
+"Electronic---Tribal House",
+0.211
+],
+[
+"Electronic---Tech House",
+0.153
+],
+[
+"Electronic---Progressive House",
+0.098
+],
+[
+"Electronic---Electro House",
+0.097
+]
+],
+"moods": {
+"relaxed": 0.143,
+"aggressive": 0.204,
+"danceable": 0.999
+}
+}
+},
+{
+"id": "demo206466c4869e7e4e89",
+"name": "Tití Me Preguntó",
+"artists": [
+"Bad Bunny"
+],
+"uri": "spotify:track:demo206466c4869e7e4e89",
+"tags": {
+"styles": [
+[
+"Hip Hop---Trap",
+0.342
+],
+[
+"Hip Hop---Cloud Rap",
+0.249
+],
+[
+"Latin---Reggaeton",
+0.068
+],
+[
+"Hip Hop---Pop Rap",
+0.058
+],
+[
+"Hip Hop---Grime",
+0.04
+]
+],
+"moods": {
+"relaxed": 0.725,
+"aggressive": 0.042,
+"danceable": 0.682
+}
+}
+},
+{
+"id": "demo9ba0edd6a809f22ae6",
+"name": "Archangel",
+"artists": [
+"Burial"
+],
+"uri": "spotify:track:demo9ba0edd6a809f22ae6",
+"tags": {
+"styles": [
+[
+"Electronic---Experimental",
+0.411
+],
+[
+"Electronic---Ambient",
+0.173
+],
+[
+"Electronic---Techno",
+0.157
+],
+[
+"Electronic---Dubstep",
+0.132
+],
+[
+"Electronic---Abstract",
+0.092
+]
+],
+"moods": {
+"relaxed": 0.721,
+"aggressive": 0.085,
+"danceable": 0.992
+}
+}
+},
+{
+"id": "demoe4ff6856b7b1ea4db2",
+"name": "Delilah (pull me out of this)",
+"artists": [
+"Fred again.."
+],
+"uri": "spotify:track:demoe4ff6856b7b1ea4db2",
+"tags": {
+"styles": [
+[
+"Electronic---Disco Polo",
+0.362
+],
+[
+"Electronic---UK Garage",
+0.199
+],
+[
+"Electronic---House",
+0.142
+],
+[
+"Electronic---Speed Garage",
+0.135
+],
+[
+"Electronic---Euro House",
+0.059
+]
+],
+"moods": {
+"relaxed": 0.115,
+"aggressive": 0.186,
+"danceable": 1.0
+}
+}
+},
+{
+"id": "demob548e3afc615893834",
+"name": "Hyph Mngo",
+"artists": [
+"Joy Orbison"
+],
+"uri": "spotify:track:demob548e3afc615893834",
+"tags": {
+"styles": [
+[
+"Electronic---Ambient",
+0.254
+],
+[
+"Electronic---Dungeon Synth",
+0.184
+],
+[
+"Electronic---Dark Ambient",
+0.108
+],
+[
+"Electronic---Experimental",
+0.099
+],
+[
+"Electronic---Vaporwave",
+0.082
+]
+],
+"moods": {
+"relaxed": 0.934,
+"aggressive": 0.157,
+"danceable": 0.626
+}
+}
+},
+{
+"id": "demod8eeeaa5006eec2a9c",
+"name": "So U Kno",
+"artists": [
+"Overmono"
+],
+"uri": "spotify:track:demod8eeeaa5006eec2a9c",
+"tags": {
+"styles": [
+[
+"Electronic---Electroclash",
+0.366
+],
+[
+"Electronic---Bassline",
+0.224
+],
+[
+"Electronic---Hip Hop",
+0.224
+],
+[
+"Pop---Indie Pop",
+0.171
+],
+[
+"Electronic---UK Garage",
+0.156
+]
+],
+"moods": {
+"relaxed": 0.06,
+"aggressive": 0.207,
+"danceable": 1.0
+}
+}
+},
+{
+"id": "demo53081bfbbb3820bdd0",
+"name": "LesAlpx",
+"artists": [
+"Floating Points"
+],
+"uri": "spotify:track:demo53081bfbbb3820bdd0",
+"tags": {
+"styles": [
+[
+"Electronic---Minimal Techno",
+0.331
+],
+[
+"Electronic---House",
+0.314
+],
+[
+"Electronic---Techno",
+0.207
+],
+[
+"Electronic---Minimal",
+0.159
+],
+[
+"Electronic---Tech House",
+0.158
+]
+],
+"moods": {
+"relaxed": 0.255,
+"aggressive": 0.056,
+"danceable": 1.0
+}
+}
+},
+{
+"id": "demo0fb3c939455608ceee",
+"name": "Can't",
+"artists": [
+"Mall Grab"
+],
+"uri": "spotify:track:demo0fb3c939455608ceee",
+"tags": {
+"styles": [
+[
+"Electronic---House",
+0.397
+],
+[
+"Electronic---Deep House",
+0.306
+],
+[
+"Electronic---Techno",
+0.188
+],
+[
+"Electronic---Garage House",
+0.091
+],
+[
+"Electronic---Downtempo",
+0.086
+]
+],
+"moods": {
+"relaxed": 0.447,
+"aggressive": 0.057,
+"danceable": 0.996
+}
+}
+},
+{
+"id": "demo6f9e074896084d58e7",
+"name": "Magic",
+"artists": [
+"Kenny Beats",
+"Vince Staples"
+],
+"uri": "spotify:track:demo6f9e074896084d58e7",
+"error": "no preview"
+}
+]
+}
