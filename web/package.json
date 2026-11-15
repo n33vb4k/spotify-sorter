@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "node scripts/copy-ort.mjs && next dev",
+    "build": "node scripts/copy-ort.mjs && next build",
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "models": "bash ../scripts/fetch-models.sh public/models"
   },
   "dependencies": {
     "next": "16.4.6",
