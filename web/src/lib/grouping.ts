@@ -74,6 +74,8 @@ export interface PlannedPlaylist {
   key: string;
   name: string;
   hue: number;
+  /** OKLCH lightness for the cabinet face; alternates so same-family hues still separate. */
+  light: number;
   trackIds: string[];
 }
 
@@ -85,8 +87,14 @@ export interface Plan {
   leftOut: Record<string, true>;
 }
 
-/** Ten hues for cabinets (degrees in OKLCH). Yellows are reserved for actions. */
-export const HUES = [345, 20, 145, 200, 265, 300, 175, 40, 235, 120];
+/**
+ * Cabinet colours by stack position: [OKLCH hue, lightness]. Neighbours sit far apart on the wheel and
+ * alternate lightness; yellows and yellow-greens (60-130) are reserved for actions.
+ */
+export const HUES: [number, number][] = [
+  [25, 0.52], [205, 0.5], [325, 0.5], [150, 0.47], [270, 0.52],
+  [45, 0.44], [0, 0.42], [235, 0.4], [295, 0.4], [165, 0.36],
+];
 
 function matches(top: string, rule: Rule): boolean {
   return rule.styles.some((s) => top === s || top.split("---")[0] === s);
@@ -125,7 +133,7 @@ export function buildPlan(tracks: TaggedTrack[], rules: Rule[] = DEFAULT_RULES, 
   const playlists = [...groups.entries()]
     .sort((a, b) => b[1].length - a[1].length || order.indexOf(a[0]) - order.indexOf(b[0]))
     // Hue by stack position, so neighbouring cabinets never share a colour.
-    .map(([name, trackIds], i) => ({ key: name, name, trackIds, hue: HUES[i % HUES.length] }));
+    .map(([name, trackIds], i) => ({ key: name, name, trackIds, hue: HUES[i % HUES.length][0], light: HUES[i % HUES.length][1] }));
   const assignment: Record<string, string> = {};
   for (const p of playlists) for (const id of p.trackIds) assignment[id] = p.key;
   return { playlists, assignment, leftOut: {} };

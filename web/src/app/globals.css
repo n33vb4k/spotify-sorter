@@ -244,13 +244,13 @@ code {
   font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
-  transition: transform 120ms var(--ease-out), background-color 120ms;
+  transition: background-color 120ms, border-color 120ms;
 }
 .btn:hover:not(:disabled) {
   border-color: var(--k6);
 }
 .btn:active:not(:disabled) {
-  transform: scale(0.97);
+  filter: brightness(0.9);
 }
 .btn:disabled {
   opacity: 0.45;
@@ -304,6 +304,9 @@ code {
   width: 100%;
   caret-color: var(--hazard);
 }
+.input::placeholder {
+  color: var(--k4);
+}
 .input:hover {
   border-color: var(--k4);
 }
@@ -344,8 +347,7 @@ select.select:hover {
 .meter > span {
   display: block;
   height: 100%;
-  background: var(--hazard);
-  transition: width 200ms var(--ease-out);
+  background: var(--k5);
 }
 
 /* ---------- the stack (signature) ---------- */
@@ -364,19 +366,41 @@ select.select:hover {
   gap: 3px;
   margin-top: auto;
 }
+.stack.has-ghost {
+  justify-content: flex-start; /* column-reverse: start = bottom */
+  outline: 1.5px dashed var(--k3);
+  outline-offset: 4px;
+  border-radius: var(--r-cab);
+}
+.cab-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.cab-row.is-short .cab {
+  flex: 0 0 62%;
+}
+.cab-aside {
+  font-family: var(--font-label);
+  font-weight: 800;
+  font-size: 0.9375rem;
+  line-height: 1;
+  color: oklch(0.85 0.08 var(--h));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .cab {
-  --h: 220;
   position: relative;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
   gap: 8px;
   width: 100%;
-  min-height: 22px;
   padding: 4px 10px;
   border: 0;
   border-radius: var(--r-cab);
-  background-color: oklch(0.5 0.12 var(--h));
+  background-color: oklch(var(--l) 0.12 var(--h));
   background-image: radial-gradient(oklch(0 0 0 / 0.32) 1px, transparent 1.4px);
   background-size: 4px 4px;
   box-shadow: inset 0 -2px 0 oklch(0 0 0 / 0.25), inset 0 1px 0 oklch(1 0 0 / 0.08);
@@ -384,15 +408,13 @@ select.select:hover {
   font: inherit;
   text-align: left;
   cursor: pointer;
-  transition: height 160ms var(--ease-out), filter 120ms, transform 120ms var(--ease-out);
+  transition: height 160ms var(--ease-out), filter 120ms;
   overflow: hidden;
 }
 .cab:hover {
   filter: brightness(1.12);
 }
-.cab:active {
-  transform: scale(0.99);
-}
+
 .cab[aria-pressed="true"] {
   outline: 2px solid var(--k6);
   outline-offset: 2px;
@@ -407,12 +429,12 @@ select.select:hover {
   white-space: nowrap;
 }
 .cab .cab-name {
-  font-size: clamp(0.95rem, calc(var(--px) * 0.42), 1.75rem);
+  font-size: clamp(0.95rem, calc(var(--px) * 0.5), 2.75rem);
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .cab .cab-count {
-  font-size: clamp(0.95rem, calc(var(--px) * 0.42), 1.75rem);
+  font-size: clamp(0.95rem, calc(var(--px) * 0.5), 2.75rem);
 }
 .stack-wrap.is-sample {
   opacity: 0.92;
@@ -563,6 +585,33 @@ select.select:hover {
   border: 0;
   font-family: inherit;
 }
+button.chip {
+  cursor: pointer;
+}
+button.chip:hover {
+  filter: brightness(1.2);
+}
+.chip[aria-expanded="true"] {
+  outline: 1.5px solid var(--k5);
+}
+.chip-blurb {
+  grid-column: 2 / 4;
+  margin-top: 4px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: var(--k2);
+  color: var(--k5);
+  font-size: var(--step-0);
+  max-width: 68ch;
+}
+.chip-blurb b {
+  color: var(--k6);
+}
+.trow .tags .swatch {
+  width: 8px;
+  height: 22px;
+  border-radius: 2px;
+}
 .chip.top {
   background: oklch(0.36 0.07 var(--h, 90));
 }
@@ -674,7 +723,7 @@ select.select:hover {
 }
 .promise svg {
   margin-top: 3px;
-  color: var(--hazard);
+  color: var(--k6);
 }
 .row {
   display: flex;
@@ -751,7 +800,7 @@ select.select:hover {
   width: 10px;
   height: 10px;
   border-radius: 2px;
-  background: oklch(0.6 0.13 var(--h));
+  background: oklch(calc(var(--l, 0.5) + 0.08) 0.13 var(--h));
   flex: none;
 }
 
@@ -857,7 +906,7 @@ select.select:hover {
   cursor: default;
 }
 .player .pp:hover:not(:disabled) {
-  transform: scale(1.05);
+  background: var(--k5);
 }
 .player .scrub {
   width: min(360px, 30vw);
@@ -926,9 +975,7 @@ select.select:hover {
     display: block;
     flex: none;
   }
-  .stage-body.has-sample > .pane:first-child {
-    display: none; /* the sample stack is a desktop flourish; phones get straight to the steps */
-  }
+
   .brand .brand-text {
     display: none;
   }

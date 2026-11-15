@@ -43,6 +43,7 @@ export function ConnectPanel({
   const [copied, setCopied] = useState(false);
   const bad = touched && !isValidClientId(id);
   const isLocalhost = redirect.includes("//localhost");
+  const uri = isLocalhost ? redirect.replace("//localhost", "//127.0.0.1") : redirect;
   return (
     <div className="prose">
       <p>
@@ -75,16 +76,22 @@ export function ConnectPanel({
           <span>
             Add this <b>redirect URI</b> and tick <b>Web API</b>:
             <span className="copyline" style={{ marginTop: 8 }}>
-              <code>{redirect}</code>
+              <code>{uri}</code>
               <button
                 type="button"
                 className="btn quiet small"
-                onClick={() => navigator.clipboard.writeText(redirect).then(() => setCopied(true))}
+                onClick={() => navigator.clipboard.writeText(uri).then(() => setCopied(true))}
               >
                 <Icon name={copied ? "check" : "copy"} size={14} />
                 {copied ? "Copied" : "Copy"}
               </button>
             </span>
+            {isLocalhost && (
+              <span className="hint" style={{ display: "block", marginTop: 8 }}>
+                Spotify won&apos;t accept <code>localhost</code> addresses, so{" "}
+                <a href={uri.replace("/callback", "/")}>reopen this page at 127.0.0.1</a> before you connect.
+              </span>
+            )}
           </span>
         </li>
         <li>
@@ -114,12 +121,6 @@ export function ConnectPanel({
           aria-invalid={bad}
           aria-describedby="client-id-hint"
         />
-        {isLocalhost && (
-          <span className="error-text">
-            Spotify doesn&apos;t accept <code>localhost</code> as a redirect. Open this page at{" "}
-            <a href={redirect.replace("localhost", "127.0.0.1").replace("/callback", "/")}>127.0.0.1</a> instead.
-          </span>
-        )}
         <span id="client-id-hint" className={bad ? "error-text" : "hint"}>
           {bad ? "That doesn't look like a Client ID: it should be 32 letters and numbers, from your app's settings." : "Saved in this browser only."}
         </span>
@@ -219,7 +220,7 @@ export function ListenPanel({
                 <span className="where">
                   {t.tags ? (
                     <>
-                      <span className={`swatch${p?.key === LEFTOVERS ? " is-leftovers" : ""}`} style={{ ["--h" as string]: p?.hue ?? 0 }} />
+                      <span className={`swatch${p?.key === LEFTOVERS ? " is-leftovers" : ""}`} style={{ ["--h" as string]: p?.hue ?? 0, ["--l" as string]: p?.light ?? 0.5 }} />
                       {styleName(t.tags.styles[0]?.[0] ?? "")}
                     </>
                   ) : (
@@ -243,7 +244,7 @@ export function CreatePanel({
   error,
   onCreate,
 }: {
-  final: { name: string; uris: string[]; hue: number }[];
+  final: { name: string; uris: string[]; hue: number; light: number }[];
   demo: boolean;
   results: CreateResult[];
   busy: boolean;
@@ -268,7 +269,7 @@ export function CreatePanel({
           const r = byName.get(p.name);
           return (
             <li key={p.name}>
-              <span className="swatch" style={{ ["--h" as string]: p.hue }} />
+              <span className="swatch" style={{ ["--h" as string]: p.hue, ["--l" as string]: p.light }} />
               <span>
                 {r?.url ? (
                   <a href={r.url} target="_blank" rel="noreferrer">

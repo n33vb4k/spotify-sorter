@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import type { Plan, TaggedTrack } from "@/lib/grouping";
 import { styleBlurb, styleName } from "@/lib/styles";
 import { Icon } from "./Icon";
@@ -35,6 +36,7 @@ export function TrackList({
   onRename: (name: string) => void;
   readOnly?: boolean;
 }) {
+  const [open, setOpen] = useState<{ id: string; style: string }>();
   const p = plan.playlists.find((x) => x.key === playlistKey);
   if (!p) return null;
   const tracks = p.trackIds.map((id) => tracksById[id]).filter(Boolean);
@@ -43,7 +45,7 @@ export function TrackList({
   const blurb = dominant && styleBlurb(dominant);
 
   return (
-    <section style={{ ["--h" as string]: p.hue }} aria-labelledby="list-title">
+    <section style={{ ["--h" as string]: p.hue, ["--l" as string]: p.light }} aria-labelledby="list-title">
       <div className="list-head">
         {readOnly ? (
           <h2 id="list-title" className="stencil">
@@ -102,11 +104,21 @@ export function TrackList({
                 )}
               </div>
               <div className="tags">
-                {styles.filter(([, v], i) => i === 0 || v >= 0.1).slice(0, 3).map(([s, v], i) => (
-                  <span key={s} className={`chip${i === 0 ? " top" : ""}`} title={styleBlurb(s)}>
-                    {styleName(s)} <span className="pct">{Math.round(v * 100)}%</span>
-                  </span>
-                ))}
+                <span className="swatch" aria-hidden />
+                {styles.filter(([, v], i) => i === 0 || v >= 0.1).slice(0, 3).map(([s, v], i) => {
+                  const isOpen = open?.id === t.id && open.style === s;
+                  return (
+                    <button
+                      type="button"
+                      key={s}
+                      className={`chip${i === 0 ? " top" : ""}`}
+                      aria-expanded={isOpen}
+                      onClick={() => setOpen(isOpen ? undefined : { id: t.id, style: s })}
+                    >
+                      {styleName(s)} <span className="pct">{Math.round(v * 100)}%</span>
+                    </button>
+                  );
+                })}
                 {t.tags?.moods.relaxed !== undefined && (
                   <span className="mood" title="How relaxed it sounds">
                     chill <i style={{ ["--v" as string]: `${Math.round((t.tags.moods.relaxed ?? 0) * 100)}%` }} />
@@ -118,6 +130,11 @@ export function TrackList({
                   </span>
                 )}
               </div>
+              {open?.id === t.id && (
+                <p className="chip-blurb">
+                  <b>{styleName(open.style)}:</b> {styleBlurb(open.style) ?? "A Discogs style the model recognised. No plain-English note for this one yet."}
+                </p>
+              )}
             </li>
           );
         })}

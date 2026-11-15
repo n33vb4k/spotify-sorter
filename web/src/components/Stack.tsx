@@ -3,9 +3,11 @@ import type { Plan } from "@/lib/grouping";
 import { LEFTOVERS } from "@/lib/grouping";
 
 /** Pixels per song. Exact proportion: a cabinet's face is count x unit, never rounded for looks. */
-export function unitFor(total: number) {
-  return Math.min(8, Math.max(2, 560 / Math.max(total, 1)));
+export function unitFor(total: number, compact = false) {
+  const u = Math.min(8, Math.max(2, 560 / Math.max(total, 1)));
+  return compact ? u / 2 : u;
 }
+const LABEL_MIN = 22;
 
 /** Smallest group that still fits a readable stencil label at this unit. */
 export function minGroupFor(total: number) {
@@ -19,6 +21,8 @@ export function Stack({
   onSelect,
   leftOutCount,
   caption,
+  compact,
+  ghost,
 }: {
   plan: Plan;
   total: number;
@@ -26,8 +30,11 @@ export function Stack({
   onSelect: (key: string) => void;
   leftOutCount: (key: string) => number;
   caption?: string;
+  compact?: boolean;
+  /** Draw the full-library height as a dashed outline, so the stack visibly fills towards it. */
+  ghost?: boolean;
 }) {
-  const unit = unitFor(total);
+  const unit = unitFor(total, compact);
   if (!plan.playlists.length)
     return (
       <div className="stack-empty">
@@ -36,29 +43,39 @@ export function Stack({
     );
   return (
     <div className="stack-wrap">
-      <ul className="stack" aria-label="Proposed playlists">
+      <ul className={`stack${ghost ? " has-ghost" : ""}`} aria-label="Proposed playlists" style={ghost ? { minHeight: total * unit } : undefined}>
         {plan.playlists.map((p) => {
           const count = p.trackIds.length - leftOutCount(p.key);
           const px = Math.max(count, 0) * unit;
+          const short = px < LABEL_MIN;
           return (
-            <li key={p.key}>
+            <li key={p.key} className={short ? "cab-row is-short" : "cab-row"} style={{ ["--h" as string]: p.hue, ["--l" as string]: p.light }}>
               <button
                 type="button"
                 className={`cab${p.key === LEFTOVERS ? " is-leftovers" : ""}`}
-                style={{ height: px, ["--h" as string]: p.hue, ["--px" as string]: `${px}px` }}
+                style={{ height: px, ["--px" as string]: `${px}px` }}
                 aria-pressed={selected === p.key}
                 aria-label={`${p.name}, ${count} songs`}
                 onClick={() => onSelect(p.key)}
               >
-                <span className="cab-name">{p.name}</span>
-                <span className="cab-count">{count}</span>
+                {!short && (
+                  <>
+                    <span className="cab-name">{p.name}</span>
+                    <span className="cab-count">{count}</span>
+                  </>
+                )}
               </button>
+              {short && (
+                <span className="cab-aside" aria-hidden>
+                  {p.name} {count}
+                </span>
+              )}
             </li>
           );
         })}
       </ul>
       <p className="stack-legend">
-        {caption ?? `${plan.playlists.length} playlists. Every song adds ${unit.toFixed(unit < 3 ? 1 : 0)}px of height.`}
+        {caption ?? `${plan.playlists.length} playlists. Taller cabinet, more songs: each song is one step of height.`}
       </p>
     </div>
   );

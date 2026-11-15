@@ -61,6 +61,7 @@ export default function App() {
   const [playing, setPlaying] = useState(false);
   const [create, setCreate] = useState<{ busy: boolean; results: spotify.CreateResult[]; error?: string }>({ busy: false, results: [] });
   const [sample, setSample] = useState<TaggedTrack[]>([]);
+  const [narrow, setNarrow] = useState(false);
   const runner = useRef<Runner | null>(null);
   const demoTimer = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -68,6 +69,10 @@ export default function App() {
     setClientIdState(spotify.getClientId());
     setRedirect(spotify.redirectUri());
     setConnected(spotify.isLoggedIn());
+    const mq = window.matchMedia("(max-width: 900px)");
+    setNarrow(mq.matches);
+    const onMq = (e: MediaQueryListEvent) => setNarrow(e.matches);
+    mq.addEventListener("change", onMq);
     fetch("/demo/library.json")
       .then((r) => r.json())
       .then((d: { tracks: TaggedTrack[] }) => setSample(d.tracks))
@@ -79,6 +84,7 @@ export default function App() {
       startScan();
     }
     return () => {
+      mq.removeEventListener("change", onMq);
       runner.current?.stop();
       if (demoTimer.current) clearInterval(demoTimer.current);
     };
@@ -188,7 +194,10 @@ export default function App() {
 
   const final = useMemo(() => {
     const out = finalPlaylists(plan, tracksById);
-    return out.map((p) => ({ ...p, hue: plan.playlists.find((x) => x.name.trim() === p.name)?.hue ?? 0 }));
+    return out.map((p) => {
+      const src = plan.playlists.find((x) => x.name.trim() === p.name);
+      return { ...p, hue: src?.hue ?? 0, light: src?.light ?? 0.5 };
+    });
   }, [plan, tracksById]);
 
   async function doCreate() {
@@ -382,11 +391,13 @@ export default function App() {
           {showStack && (
             <div className="pane" aria-label="Playlist stack">
               {showSample ? (
-                <Stack plan={samplePlan} total={sample.length} leftOutCount={() => 0} caption="A sample stack: 60 well-known songs, sorted by the same models. Pick a cabinet to try it." onSelect={() => startDemo()} />
+                <Stack plan={samplePlan} total={sample.length} compact={narrow} leftOutCount={() => 0} caption="A sample stack: 60 well-known songs, sorted by the same models. Pick a cabinet to try it." onSelect={() => startDemo()} />
               ) : (
                 <Stack
                   plan={plan}
                   total={total}
+                  compact={narrow}
+                  ghost={step === "listen" && listen.status !== "done"}
                   selected={step === "review" ? selectedKey : undefined}
                   leftOutCount={leftOutIn}
                   onSelect={(k) => {
