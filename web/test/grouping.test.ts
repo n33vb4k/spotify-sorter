@@ -39,3 +39,25 @@ describe("buildPlan", () => {
     expect(p.playlists.flatMap((x) => x.trackIds)).toContain("b1"); // left out, still visible
   });
 });
+
+import { assignColours } from "../src/lib/grouping";
+describe("assignColours", () => {
+  const angle = (a: number, b: number) => Math.min(Math.abs(a - b), 360 - Math.abs(a - b));
+  it("keeps a playlist's colour regardless of which others exist", () => {
+    expect(assignColours(["UK Garage", "Chill"])["UK Garage"]).toEqual(assignColours(["UK Garage", "Trap", "Chill"])["UK Garage"]);
+  });
+  it("never puts two cabinets of a typical stack in one colour family", () => {
+    const names = ["Electronic", "Trap", "Drum & Bass", "Rock & Alt", "Grime & UK Rap", "UK Garage", "House & Techno", "Chill", "Bassline & 140"];
+    const c = Object.values(assignColours(names));
+    for (let i = 0; i < c.length; i++) for (let j = i + 1; j < c.length; j++) expect(angle(c[i][0], c[j][0])).toBeGreaterThanOrEqual(20);
+  });
+});
+
+describe("fixed colours", () => {
+  it("keeps colours already shown even when an earlier-ranked playlist appears", () => {
+    const first = assignColours(["Grime & UK Rap", "UK Garage"]);
+    const later = assignColours(["Drum & Bass", "Grime & UK Rap", "UK Garage"], undefined, first);
+    expect(later["Grime & UK Rap"]).toEqual(first["Grime & UK Rap"]);
+    expect(later["UK Garage"]).toEqual(first["UK Garage"]);
+  });
+});

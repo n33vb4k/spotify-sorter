@@ -93,7 +93,13 @@ export default function App() {
 
   const total = library.length;
   const taggedList = useMemo(() => Object.values(tagged), [tagged]);
-  const base = useMemo(() => buildPlan(taggedList.filter((t) => t.tags), DEFAULT_RULES, minGroupFor(total)), [taggedList, total]);
+  // Colours stick to a playlist for the session, so a cabinet never changes colour as others appear.
+  const colours = useRef<Record<string, [number, number]>>({});
+  const base = useMemo(() => {
+    const p = buildPlan(taggedList.filter((t) => t.tags), DEFAULT_RULES, minGroupFor(total), colours.current);
+    for (const pl of p.playlists) colours.current[pl.key] = [pl.hue, pl.light];
+    return p;
+  }, [taggedList, total]);
   const plan = useMemo(() => applyEdits(base, edits, order), [base, edits, order]);
   const tracksById = useMemo(() => Object.fromEntries(library.map((t) => [t.id, tagged[t.id] ?? t])), [library, tagged]);
   const untagged = taggedList.filter((t) => !t.tags).length;
@@ -133,6 +139,7 @@ export default function App() {
   }
 
   function startListen(songs: TaggedTrack[]) {
+    colours.current = {};
     setStep("listen");
     setTagged({});
     setRecent([]);
@@ -156,6 +163,7 @@ export default function App() {
     const res = await fetch("/demo/library.json");
     const lib: { tracks: TaggedTrack[] } = await res.json();
     setLibrary(lib.tracks);
+    colours.current = {};
     setStep("listen");
     setTagged({});
     setRecent([]);

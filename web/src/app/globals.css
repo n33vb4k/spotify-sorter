@@ -305,7 +305,7 @@ code {
   caret-color: var(--hazard);
 }
 .input::placeholder {
-  color: var(--k4);
+  color: var(--k5);
 }
 .input:hover {
   border-color: var(--k4);

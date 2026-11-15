@@ -88,13 +88,60 @@ export interface Plan {
 }
 
 /**
- * Cabinet colours by stack position: [OKLCH hue, lightness]. Neighbours sit far apart on the wheel and
- * alternate lightness; yellows and yellow-greens (60-130) are reserved for actions.
+ * Cabinet colours as [OKLCH hue, lightness]. Yellows and yellow-greens (60-130) are reserved for actions.
+ * Each playlist prefers its own hue (so it keeps its colour from Listen to Review); if another playlist
+ * in the same stack already took that colour family, it moves to the free slot furthest from the rest.
  */
-export const HUES: [number, number][] = [
-  [25, 0.52], [205, 0.5], [325, 0.5], [150, 0.47], [270, 0.52],
-  [45, 0.44], [0, 0.42], [235, 0.4], [295, 0.4], [165, 0.36],
+export const PALETTE: [number, number][] = [
+  [25, 0.52], [150, 0.47], [205, 0.5], [270, 0.52], [325, 0.5],
+  [45, 0.42], [175, 0.4], [235, 0.38], [295, 0.4], [0, 0.42], [345, 0.36], [190, 0.58],
 ];
+const PREFERRED: Record<string, number> = {
+  "Bassline & 140": 4, "UK Garage": 1, "Drum & Bass": 0, "Breaks & UK Bass": 8, "House & Techno": 2,
+  Chill: 3, "R&B & Soul": 9, Trap: 7, "Cloud & Emo Rap": 10, "Grime & UK Rap": 5, "Classic Hip Hop": 6,
+  "Reggae & Dancehall": 1, "Rock & Alt": 0, Pop: 4, Latin: 9, "World & Folk": 6, Soundtracks: 11, Electronic: 11,
+};
+const angle = (a: number, b: number) => Math.min(Math.abs(a - b), 360 - Math.abs(a - b));
+const FAMILY = 40; // hues closer than this read as the same colour
+
+/** Assign colours in rule order (not stack position), so a playlist's colour doesn't change when the stack re-sorts. */
+export function assignColours(
+  names: string[],
+  rules: Rule[] = DEFAULT_RULES,
+  /** Colours already shown this session; they're kept so a cabinet never changes colour. */
+  fixed: Record<string, [number, number]> = {},
+): Record<string, [number, number]> {
+  const order = [...rules.map((r) => r.name), LEFTOVERS];
+  const sorted = [...names].sort((a, b) => order.indexOf(a) - order.indexOf(b));
+  const out: Record<string, [number, number]> = {};
+  const taken: number[] = [];
+  for (const name of sorted) {
+    const f = fixed[name];
+    if (!f) continue;
+    out[name] = f;
+    const i = PALETTE.findIndex((p) => p[0] === f[0] && p[1] === f[1]);
+    if (i >= 0) taken.push(i);
+  }
+  for (const name of sorted) {
+    if (out[name]) continue;
+    if (name === LEFTOVERS) {
+      out[name] = [0, 0.3];
+      continue;
+    }
+    const free = (i: number) => taken.every((t) => angle(PALETTE[i][0], PALETTE[t][0]) >= FAMILY);
+    let pick = PREFERRED[name] ?? 0;
+    if (!free(pick) || taken.includes(pick)) {
+      const candidates = PALETTE.map((_, i) => i).filter((i) => !taken.includes(i));
+      pick =
+        candidates.find(free) ??
+        candidates.sort((a, b) => Math.min(...taken.map((t) => angle(PALETTE[b][0], PALETTE[t][0]))) - Math.min(...taken.map((t) => angle(PALETTE[a][0], PALETTE[t][0]))))[0] ??
+        0;
+    }
+    taken.push(pick);
+    out[name] = PALETTE[pick];
+  }
+  return out;
+}
 
 function matches(top: string, rule: Rule): boolean {
   return rule.styles.some((s) => top === s || top.split("---")[0] === s);
@@ -116,7 +163,12 @@ export function playlistFor(tags: Tags, rules: Rule[] = DEFAULT_RULES): string {
  * Group tagged tracks into playlists. Groups smaller than `minSize` fold into "Everything else",
  * so the stack doesn't fill up with two-song cabinets.
  */
-export function buildPlan(tracks: TaggedTrack[], rules: Rule[] = DEFAULT_RULES, minSize = 4): Plan {
+export function buildPlan(
+  tracks: TaggedTrack[],
+  rules: Rule[] = DEFAULT_RULES,
+  minSize = 4,
+  fixedColours: Record<string, [number, number]> = {},
+): Plan {
   const groups = new Map<string, string[]>();
   for (const t of tracks) {
     if (!t.tags) continue;
@@ -130,10 +182,10 @@ export function buildPlan(tracks: TaggedTrack[], rules: Rule[] = DEFAULT_RULES, 
     }
   }
   const order = [...rules.map((r) => r.name), LEFTOVERS];
+  const colours = assignColours([...groups.keys()], rules, fixedColours);
   const playlists = [...groups.entries()]
     .sort((a, b) => b[1].length - a[1].length || order.indexOf(a[0]) - order.indexOf(b[0]))
-    // Hue by stack position, so neighbouring cabinets never share a colour.
-    .map(([name, trackIds], i) => ({ key: name, name, trackIds, hue: HUES[i % HUES.length][0], light: HUES[i % HUES.length][1] }));
+    .map(([name, trackIds]) => ({ key: name, name, trackIds, hue: colours[name][0], light: colours[name][1] }));
   const assignment: Record<string, string> = {};
   for (const p of playlists) for (const id of p.trackIds) assignment[id] = p.key;
   return { playlists, assignment, leftOut: {} };
