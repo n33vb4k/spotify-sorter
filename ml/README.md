@@ -26,6 +26,6 @@ is needed: only official ONNX files are used.
 - `make_fixture.py`: writes `web/test/fixtures/pipeline.json` from a synthetic signal for the TS tests.
 
 ```sh
-scripts/fetch-models.sh ml/models
+web/scripts/fetch-models.sh ml/models
 PYTHONPATH=ml cli/.venv/bin/python ml/parity.py 20
 ```
