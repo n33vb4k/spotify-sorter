@@ -11,7 +11,13 @@ existing playlists.
 | Folder | What |
 |---|---|
 | [`cli/`](cli/) | Python command-line version (Spotify API + Essentia). |
-| [`web/`](web/) | Next.js web app: runs the models in your browser, so nothing needs a server. *(in progress)* |
+| [`web/`](web/) | Next.js web app: runs the models in your browser, so nothing needs a server. |
+| [`ml/`](ml/) | Reference pipeline and parity tests proving the browser version matches Essentia. |
+
+## How accurate is the browser version?
+
+It reproduces Essentia's own TensorFlow pipeline: within 1e-5 on 20 real tracks in Python (`ml/parity.py`),
+and 12/12 identical top styles end to end in a real browser, including browser MP3 decoding.
 
 ## License
 

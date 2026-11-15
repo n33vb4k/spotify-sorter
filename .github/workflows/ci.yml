@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      # The full-model test is skipped unless ml/models exists; mel-feature tests always run.
+      - run: npm test
+      - run: npm run build
+
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Syntax check CLI and ml scripts
+        run: python -m py_compile cli/*.py ml/*.py
+      - name: Mel reference self-consistency
+        run: |
+          pip install numpy
+          python -c "import sys; sys.path.insert(0,'ml'); import mel_reference as m, numpy as np; fb=m.mel_filterbank(); assert fb.shape==(96,257); print('ok')"
