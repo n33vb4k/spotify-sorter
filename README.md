@@ -14,6 +14,8 @@ existing playlists.
 | [`web/`](web/) | Next.js web app: runs the models in your browser, so nothing needs a server. |
 | [`ml/`](ml/) | Reference pipeline and parity tests proving the browser version matches Essentia. |
 
+**How it works and why:** see [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+
 ## How accurate is the browser version?
 
 It reproduces Essentia's own TensorFlow pipeline: within 1e-5 on 20 real tracks in Python (`ml/parity.py`),
