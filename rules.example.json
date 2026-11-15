@@ -1,0 +1,17 @@
+{
+  "skip_existing_plan": true,
+  "existing_plans": [],
+  "playlists": [
+    {"name": "Chill Tunes", "description": "Laid-back pop, soul, indie & R&B.",
+     "artists": ["Sade", "Tame Impala"],
+     "styles": ["Pop", "Funk / Soul", "Electronic---Downtempo", "Electronic---Chillwave", "Hip Hop---RnB/Swing", "Rock---Indie Rock"],
+     "max_aggressive": 0.5},
+    {"name": "Grime", "artists": ["Skepta", "Jme", "Wiley"], "styles": ["Hip Hop---Grime"]},
+    {"name": "UK Garage", "styles": ["Electronic---UK Garage", "Electronic---Speed Garage"]},
+    {"name": "Bassline", "styles": ["Electronic---Bassline"]},
+    {"name": "Drum & Bass", "styles": ["Electronic---Drum n Bass", "Electronic---Jungle"]},
+    {"name": "House", "styles": ["Electronic---House", "Electronic---Tech House", "Electronic---Minimal", "Electronic---Deep House"]},
+    {"name": "Hip Hop", "styles": ["Hip Hop"]},
+    {"name": "Rock", "styles": ["Rock"]}
+  ]
+}

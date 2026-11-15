@@ -16,7 +16,8 @@ always artist-level and vague anyway ("UK dance"). This tool:
 
 - Never edits, reorders, removes from or deletes existing playlists or liked songs.
 - `create` skips any playlist name you already have.
-- `add` only works on playlists this tool created (tracked in `data/created_playlists.json`).
+- `add` / `add_to_existing` only work on playlists this tool created (tracked in `data/created_playlists.json`),
+  and never add a song that's already in the playlist.
 - Your data, tokens and client ID stay local (`data/`, `.token.json`, `config.json` are git-ignored).
 
 ## Setup
@@ -40,16 +41,29 @@ always artist-level and vague anyway ("UK dance"). This tool:
 ```sh
 python3 spotify.py auth                 # log in (opens browser)
 python3 spotify.py pull                 # download library -> data/
+.venv/bin/python prefetch.py            # download 30s previews from Deezer (parallel, cached)
 .venv/bin/python classify.py            # tag every liked song (resumable)
+python3 group.py rules.json --out plan.json   # turn tags + your rules into a playlist plan
 .venv/bin/python analyze.py "Artist - Title" ...   # optional: BPM / swing / kick / sub-bass readout
 python3 spotify.py create plan.json     # create new playlists from a plan
 python3 spotify.py add "Playlist" "Artist - Title" ...
 ```
 
-A plan file is a list of `{"name", "description", "uris": [...]}`.
+A plan file is a list of `{"name", "description", "uris": [...], "add_to_existing": false}`.
+
+### Rules
+
+Copy `rules.example.json` to `rules.json` and edit it. Each playlist can match on **artists** (always wins,
+handy because audio can't tell UK rap from US rap) and/or the track's top Essentia **style**
+(`"Genre---Style"` or a whole `"Genre"`), with optional `max_aggressive` / `min_relaxed` mood filters.
+First match wins, so put specific playlists before broad ones. Unmatched songs go to `data/unsorted.txt`.
+Run `python3 -c "import json; print(json.load(open('models/genre_discogs400-discogs-effnet-1.json'))['classes'])"`
+to see every style label.
 
 ## Limits
 
+- Spotify dev-mode apps get rate-limited hard (we hit a ~23h block on per-track lookups), so previews are
+  matched on Deezer by artist + title rather than looking up each track on Spotify.
 - Skips aren't available via the API. Request **Extended streaming history** from Spotify
   (Account → Privacy → Download your data) for per-play `skipped` / `ms_played` data.
 - 30-second previews sometimes miss the drop, and some tracks have no Deezer preview.

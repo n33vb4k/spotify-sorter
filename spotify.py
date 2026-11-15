@@ -173,12 +173,19 @@ def pull():
 
 
 def create(plan_path):
-    """plan.json: [{"name": "...", "description": "...", "uris": ["spotify:track:..."]}]"""
+    """plan.json: [{"name", "description", "uris": [...], "add_to_existing": false}]
+    add_to_existing=true appends to a playlist THIS tool created; anything else makes a new playlist."""
     plan = json.load(open(plan_path))
     existing = {p["name"].lower() for p in json.load(open(os.path.join(DATA, "playlists.json")))}
     log_path = os.path.join(DATA, "created_playlists.json")
     log = json.load(open(log_path)) if os.path.exists(log_path) else []
+    created = {p["name"]: p["id"] for p in log}
     for pl in plan:
+        if pl.get("add_to_existing"):
+            if pl["name"] not in created:
+                print(f"SKIP '{pl['name']}': not a playlist this tool created (won't touch it)"); continue
+            _add_uris(created[pl["name"]], pl["uris"])
+            print(f"Added {len(pl['uris'])} tracks to '{pl['name']}'"); continue
         if pl["name"].lower() in existing:
             print(f"SKIP '{pl['name']}': a playlist with that name already exists (won't touch it)")
             continue
@@ -190,14 +197,24 @@ def create(plan_path):
         log.append({"id": new["id"], "name": pl["name"]})
         with open(log_path, "w") as f:
             json.dump(log, f, indent=1)
-        uris = pl["uris"]
-        for i in range(0, len(uris), 100):
-            chunk = {"uris": uris[i:i + 100]}
-            try:
-                api("POST", f"/playlists/{new['id']}/items", chunk)
-            except RuntimeError:
-                api("POST", f"/playlists/{new['id']}/tracks", chunk)
-        print(f"Created '{pl['name']}' with {len(uris)} tracks")
+        _add_uris(new["id"], pl["uris"])
+        print(f"Created '{pl['name']}' with {len(pl['uris'])} tracks")
+
+
+def _add_uris(pid, uris):
+    """Append uris to a playlist, skipping any already in it."""
+    try:
+        have = {(i.get("item") or i.get("track") or {}).get("uri") for i in paged(f"/playlists/{pid}/items?limit=50")}
+    except RuntimeError:
+        have = {(i.get("track") or {}).get("uri") for i in paged(f"/playlists/{pid}/tracks?limit=50")}
+    uris = [u for u in dict.fromkeys(uris) if u not in have]
+    for i in range(0, len(uris), 100):
+        chunk = {"uris": uris[i:i + 100]}
+        try:
+            api("POST", f"/playlists/{pid}/items", chunk)
+        except RuntimeError as e:
+            if "rate limit" in str(e): raise
+            api("POST", f"/playlists/{pid}/tracks", chunk)
 
 
 def add(name, queries):
@@ -211,10 +228,7 @@ def add(name, queries):
         m = [t for t in liked if q.lower() in (", ".join(t["artists"]) + " - " + t["name"]).lower()]
         if len(m) != 1: sys.exit(f"'{q}' matched {len(m)} liked songs")
         uris.append(m[0]["uri"]); print("  +", ", ".join(m[0]["artists"]), "-", m[0]["name"])
-    try:
-        api("POST", f"/playlists/{created[name]}/items", {"uris": uris})
-    except RuntimeError:
-        api("POST", f"/playlists/{created[name]}/tracks", {"uris": uris})
+    _add_uris(created[name], uris)
     print(f"Added {len(uris)} to '{name}'")
 
 
