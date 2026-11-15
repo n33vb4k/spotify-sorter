@@ -1,14 +1,28 @@
-# personal / secret
-config.json
-.token.json
-data/
-local/
-plan*.json
-# env
+# secrets / personal data (CLI)
+cli/config.json
+cli/.token.json
+cli/data/
+cli/local/
+cli/models/
+cli/plan*.json
+cli/rules.json
+# personal notes
+full_proj.md
+# python
 .venv/
 __pycache__/
+# node / next
+node_modules/
+.next/
+out/
+web/public/models/
+*.tsbuildinfo
+.env*
+!.env.example
+.vercel
+# editors / os
 .DS_Store
-models/
-full_proj.md
 .codex/
 .cursor/
+.vscode/
+.idea/
