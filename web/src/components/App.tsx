@@ -163,7 +163,8 @@ export default function App() {
     const res = await fetch("/demo/library.json");
     const lib: { tracks: TaggedTrack[] } = await res.json();
     setLibrary(lib.tracks);
-    colours.current = {};
+    // Reuse the Connect screen's sample-stack colours, so a cabinet you clicked keeps its colour.
+    colours.current = Object.fromEntries(samplePlan.playlists.map((p) => [p.key, [p.hue, p.light] as [number, number]]));
     setStep("listen");
     setTagged({});
     setRecent([]);

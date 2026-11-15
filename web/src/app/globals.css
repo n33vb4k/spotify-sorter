@@ -91,6 +91,7 @@ code {
   height: 100dvh;
 }
 .rail {
+  position: relative;
   grid-row: 1 / 2;
   background: var(--k1);
   padding: 20px 12px;
@@ -183,6 +184,7 @@ code {
 }
 
 .stage {
+  position: relative; /* contains .sr-only labels so they can't stretch the document */
   overflow: hidden;
   display: flex;
   flex-direction: column;
