@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font",
+        "value": "sf mono",
+        "createdAt": "2026-11-15T03:24:31.246Z",
+        "reason": "agent decision: system monospace stack is used only for literal values (Client ID input, redirect URI code) where character-exact reading matters; not a brand face"
+      }
+    ]
+  }
+}
