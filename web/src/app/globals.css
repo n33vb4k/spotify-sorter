@@ -752,6 +752,31 @@ button.chip:hover {
   color: var(--k6);
 }
 
+.own-app {
+  border-top: 1px solid var(--k2);
+  padding-top: 16px;
+  display: grid;
+  gap: 16px;
+}
+.own-app[open] {
+  gap: 16px;
+}
+.own-app > summary {
+  cursor: pointer;
+  color: var(--k6);
+  font-weight: 600;
+  list-style-position: outside;
+  margin-left: 18px;
+}
+.own-app > summary:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--k4);
+}
+.own-app[open] > summary {
+  margin-bottom: 16px;
+}
+
 /* listen */
 .now {
   display: grid;

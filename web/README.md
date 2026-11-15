@@ -34,17 +34,29 @@ To try it with your account, create an app at <https://developer.spotify.com/das
 
 ## Deploy (Vercel, free tier)
 
-Not deployed yet. When you're ready:
-
 1. Import the repo in Vercel and set **Root Directory** to `web`. `vercel.json` sets the build command to
    `npm run models && npm run build`.
-2. If Essentia's model server is flaky during builds, upload the six model files from `public/models` to a
-   GitHub Release and set `NEXT_PUBLIC_MODEL_BASE` to that URL (unmodified redistribution with attribution
-   is allowed by the models' licence).
-3. Add `https://<your-domain>/callback` as a redirect URI in each Spotify app that will log in.
+2. **Environment variables** (see `.env.example`), both optional:
+   - `NEXT_PUBLIC_SPOTIFY_CLIENT_ID`: your Spotify app's Client ID. People you've added under **User
+     Management** in that app's dashboard connect in one click; anyone else can still bring their own Client
+     ID (the app detects Spotify's "user not registered" response and offers that route).
+   - `NEXT_PUBLIC_MODEL_BASE`: load models from elsewhere (e.g. a GitHub Release) if Essentia's server is
+     flaky during builds. Unmodified redistribution with attribution is allowed by the models' licence.
+3. In your Spotify app, add `https://<your-domain>/callback` as a redirect URI. Friends using their own app
+   add the same URI to theirs.
+4. Recommended: in Vercel → Firewall, add a rate-limit rule on `/api/preview` (e.g. 600 requests/min per IP).
+   The route already limits each instance to 300/min per IP, which a real tagging run (about 60–120/min)
+   never reaches; the firewall rule covers traffic spread across instances.
 
-Costs: static pages + one tiny function. Each visitor downloads ~20 MB of models once (browser-cached) and
-~15 MB of WebAssembly runtime.
+### Security
+
+- No server-side secrets or storage. Login is PKCE in the browser; tokens live in the visitor's browser.
+- Strict security headers (`next.config.ts`): CSP limited to this site, Spotify's API and Deezer's preview
+  CDN; no framing; no referrer from `/callback`; HSTS. The CSP allows inline scripts because the pages are
+  statically rendered (nonces would force dynamic rendering); the app never renders user data as HTML.
+- `/api/preview` only calls Deezer's fixed API host, rejects cross-site requests, caps input length, and is
+  rate-limited; clients back off and retry on 429, so normal use isn't slowed.
+- `/dev/parity` returns 404 in production unless built with `ENABLE_DEV_PAGES=1`.
 
 ## Limits
 

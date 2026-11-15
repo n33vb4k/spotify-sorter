@@ -21,11 +21,20 @@ export type RunEvent =
 
 const MODEL_BASE = process.env.NEXT_PUBLIC_MODEL_BASE || "/models";
 
-export async function findPreview(t: Track): Promise<string | null> {
+export async function findPreview(t: Track, attempts = 4): Promise<string | null> {
   const q = new URLSearchParams({ artists: t.artists.join("|"), title: t.name });
-  const res = await fetch(`/api/preview?${q}`);
-  if (!res.ok) throw new Error(`preview lookup failed (${res.status})`);
-  return (await res.json()).preview ?? null;
+  for (let i = 0; i < attempts; i++) {
+    const res = await fetch(`/api/preview?${q}`);
+    if (res.status === 429 || res.status === 502) {
+      // Back off and retry rather than marking the song as failed.
+      const wait = Number(res.headers.get("Retry-After")) || 2 ** i;
+      await new Promise((r) => setTimeout(r, Math.min(wait, 30) * 1000));
+      continue;
+    }
+    if (!res.ok) throw new Error(`preview lookup failed (${res.status})`);
+    return (await res.json()).preview ?? null;
+  }
+  throw new Error("preview lookup kept failing");
 }
 
 export class Runner {

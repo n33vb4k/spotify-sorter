@@ -3,6 +3,14 @@
  * so this tiny proxy does the lookup; the MP3 itself is fetched by the browser directly (its CDN allows it).
  * Stateless, stores nothing, logs nothing.
  */
+import { clientKey, RateLimiter } from "@/lib/server/rateLimit";
+
+/**
+ * 300 lookups/min per IP. A real tagging run makes ~1-2/s (60-120/min), so normal use never hits this,
+ * even with a few people behind one home IP; scripted abuse does. The client backs off on 429.
+ */
+const limiter = new RateLimiter(300, 60_000);
+
 const clean = (s: string) => s.split(" - ")[0].split(" (feat")[0].split(" (with")[0].split(" [")[0].trim();
 
 interface DeezerHit {
@@ -23,6 +31,11 @@ async function search(q: string): Promise<DeezerHit[]> {
 }
 
 export async function GET(req: Request) {
+  // Only serve this site's own pages: browsers mark requests from other sites as cross-site.
+  if (req.headers.get("sec-fetch-site") === "cross-site") return Response.json({ error: "forbidden" }, { status: 403 });
+  const retry = limiter.check(clientKey(req));
+  if (retry) return Response.json({ error: "rate limited" }, { status: 429, headers: { "Retry-After": String(retry) } });
+
   const { searchParams } = new URL(req.url);
   const artists = (searchParams.get("artists") ?? "").split("|").map((a) => a.trim()).filter(Boolean).slice(0, 6);
   const title = clean(searchParams.get("title") ?? "").slice(0, 200);

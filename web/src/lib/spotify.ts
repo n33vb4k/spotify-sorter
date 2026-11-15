@@ -9,6 +9,10 @@ const SCOPES = "user-library-read playlist-read-private playlist-modify-private"
 const K = { client: "ss.clientId", verifier: "ss.pkceVerifier", state: "ss.pkceState", token: "ss.token" };
 
 export const redirectUri = () => `${window.location.origin}/callback`;
+
+/** Optional Client ID baked in by whoever deploys the site; users can still bring their own. */
+export const BUILTIN_CLIENT_ID = (process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID ?? "").trim();
+export const isBuiltin = (id: string) => !!BUILTIN_CLIENT_ID && id.trim() === BUILTIN_CLIENT_ID;
 export const getClientId = () => localStorage.getItem(K.client) ?? "";
 export const setClientId = (id: string) => localStorage.setItem(K.client, id.trim());
 export const isValidClientId = (id: string) => /^[0-9a-f]{32}$/i.test(id.trim());
@@ -90,6 +94,7 @@ function loadToken(): Token | null {
 
 export const isLoggedIn = () => !!loadToken();
 export const logout = () => localStorage.removeItem(K.token);
+export const forgetClientId = () => localStorage.removeItem(K.client);
 
 async function accessToken(): Promise<string> {
   const tok = loadToken();
@@ -97,6 +102,18 @@ async function accessToken(): Promise<string> {
   if (Date.now() < tok.expires_at) return tok.access_token;
   if (!tok.refresh_token) throw new Error("Your Spotify session expired. Connect again.");
   return (await tokenRequest({ grant_type: "refresh_token", refresh_token: tok.refresh_token, client_id: getClientId() })).access_token;
+}
+
+/** Development-mode Spotify apps only work for accounts the app owner has added in the dashboard. */
+export class NotRegisteredError extends Error {
+  constructor() {
+    super("This site's Spotify app hasn't added your account yet. Ask whoever runs it to add you, or connect with your own free Spotify app instead.");
+  }
+}
+
+/** Spotify answers 403 "User not registered in the Developer Dashboard" for accounts missing from a dev-mode app's list. */
+export function isNotRegistered(status: number, body: string) {
+  return status === 403 && /not (been )?registered|developer dashboard|user may not be registered/i.test(body);
 }
 
 export class RateLimitError extends Error {
@@ -124,6 +141,7 @@ export async function api<T = unknown>(method: string, path: string, body?: unkn
       continue;
     }
     const text = await res.text();
+    if (isNotRegistered(res.status, text)) throw new NotRegisteredError();
     if (!res.ok) throw new Error(`Spotify ${res.status} on ${path.replace(API, "")}: ${text.slice(0, 160)}`);
     return (text ? JSON.parse(text) : {}) as T;
   }

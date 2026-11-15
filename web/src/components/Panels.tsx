@@ -29,16 +29,22 @@ export function ConnectPanel({
   initialId,
   redirect,
   error,
+  builtinId,
+  ownOpen,
   onConnect,
   onDemo,
 }: {
   initialId: string;
   redirect: string;
   error?: string;
+  /** Client ID the site ships with, if any. */
+  builtinId?: string;
+  /** Start with the "use your own app" steps open (e.g. after Spotify rejected the built-in app). */
+  ownOpen?: boolean;
   onConnect: (id: string) => void;
   onDemo: () => void;
 }) {
-  const [id, setId] = useState(initialId);
+  const [id, setId] = useState(initialId && initialId !== builtinId ? initialId : "");
   const [touched, setTouched] = useState(false);
   const [copied, setCopied] = useState(false);
   const bad = touched && !isValidClientId(id);
@@ -58,10 +64,44 @@ export function ConnectPanel({
       </div>
 
       <h2>Connect your Spotify</h2>
-      <p>
-        Spotify only lets small apps like this one talk to accounts that brought their own app key, so you&apos;ll make a free one. It takes about five minutes,
-        once.
-      </p>
+      {builtinId ? (
+        <>
+          <p>If the person who runs this site has added your Spotify account to their app, you can connect straight away.</p>
+          <div className="row">
+            <button type="button" className="btn primary" onClick={() => onConnect(builtinId)}>
+              Connect Spotify
+            </button>
+          </div>
+          {error && (
+            <p className="notice" role="alert">
+              {error}
+            </p>
+          )}
+          <details className="own-app" open={ownOpen}>
+            <summary>Not on their list? Use your own Spotify app</summary>
+            {ownSteps()}
+          </details>
+        </>
+      ) : (
+        <>
+          <p>
+            Spotify only lets small apps like this one talk to accounts that brought their own app key, so you&apos;ll make a free one. It takes about five
+            minutes, once.
+          </p>
+          {ownSteps()}
+          {error && (
+            <p className="notice" role="alert">
+              {error}
+            </p>
+          )}
+        </>
+      )}
+    </div>
+  );
+
+  function ownSteps() {
+    return (
+      <>
       <ol className="howto">
         <li>
           <span>
@@ -125,21 +165,31 @@ export function ConnectPanel({
           {bad ? "That doesn't look like a Client ID: it should be 32 letters and numbers, from your app's settings." : "Saved in this browser only."}
         </span>
         <div className="row" style={{ marginTop: 8 }}>
-          <button type="submit" className="btn primary">
-            Connect Spotify
+          <button type="submit" className={builtinId ? "btn" : "btn primary"}>
+            {builtinId ? "Connect with my app" : "Connect Spotify"}
           </button>
         </div>
       </form>
-      {error && (
-        <p className="notice" role="alert">
-          {error}
-        </p>
-      )}
-    </div>
-  );
+      </>
+    );
+  }
 }
 
-export function ScanPanel({ done, total, error, onRetry }: { done: number; total: number; error?: string; onRetry: () => void }) {
+export function ScanPanel({
+  done,
+  total,
+  error,
+  notRegistered,
+  onRetry,
+  onUseOwn,
+}: {
+  done: number;
+  total: number;
+  error?: string;
+  notRegistered?: boolean;
+  onRetry: () => void;
+  onUseOwn: () => void;
+}) {
   return (
     <div className="now" aria-live="polite">
       <div className="big">{done}</div>
@@ -153,9 +203,15 @@ export function ScanPanel({ done, total, error, onRetry }: { done: number; total
             {error}
           </p>
           <div className="row">
-            <button className="btn" onClick={onRetry}>
-              Try again
-            </button>
+            {notRegistered ? (
+              <button className="btn primary" onClick={onUseOwn}>
+                Use my own Spotify app
+              </button>
+            ) : (
+              <button className="btn" onClick={onRetry}>
+                Try again
+              </button>
+            )}
           </div>
         </>
       )}

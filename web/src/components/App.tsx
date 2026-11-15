@@ -50,7 +50,8 @@ export default function App() {
   const [connectError, setConnectError] = useState<string>();
 
   const [library, setLibrary] = useState<TaggedTrack[]>([]);
-  const [scan, setScan] = useState({ done: 0, total: 0, error: undefined as string | undefined });
+  const [scan, setScan] = useState({ done: 0, total: 0, error: undefined as string | undefined, notRegistered: false });
+  const [ownOpen, setOwnOpen] = useState(false);
   const [tagged, setTagged] = useState<Record<string, TaggedTrack>>({});
   const [recent, setRecent] = useState<TaggedTrack[]>([]);
   const [listen, setListen] = useState<{ done: number; status: "loading" | "running" | "done" | "stopped" | "error"; error?: string }>({ done: 0, status: "loading" });
@@ -128,13 +129,13 @@ export default function App() {
   async function startScan() {
     setDemo(false);
     setStep("scan");
-    setScan({ done: 0, total: 0, error: undefined });
+    setScan({ done: 0, total: 0, error: undefined, notRegistered: false });
     try {
-      const songs = await spotify.likedSongs((done, total) => setScan({ done, total, error: undefined }));
+      const songs = await spotify.likedSongs((done, total) => setScan({ done, total, error: undefined, notRegistered: false }));
       setLibrary(songs);
       startListen(songs);
     } catch (e) {
-      setScan((s) => ({ ...s, error: (e as Error).message }));
+      setScan((s) => ({ ...s, error: (e as Error).message, notRegistered: e instanceof spotify.NotRegisteredError }));
     }
   }
 
@@ -269,8 +270,35 @@ export default function App() {
         </div>
       );
     if (step === "connect")
-      return <ConnectPanel initialId={clientId} redirect={redirect} error={connectError} onConnect={(id) => spotify.beginLogin(id)} onDemo={startDemo} />;
-    if (step === "scan") return <ScanPanel done={scan.done} total={scan.total} error={scan.error} onRetry={startScan} />;
+      return (
+        <ConnectPanel
+          initialId={clientId}
+          redirect={redirect}
+          error={connectError}
+          builtinId={spotify.BUILTIN_CLIENT_ID || undefined}
+          ownOpen={ownOpen}
+          onConnect={(id) => spotify.beginLogin(id)}
+          onDemo={startDemo}
+        />
+      );
+    if (step === "scan")
+      return (
+        <ScanPanel
+          done={scan.done}
+          total={scan.total}
+          error={scan.error}
+          notRegistered={scan.notRegistered}
+          onRetry={startScan}
+          onUseOwn={() => {
+            spotify.logout();
+            spotify.forgetClientId();
+            setConnected(false);
+            setClientIdState("");
+            setOwnOpen(true);
+            setStep("connect");
+          }}
+        />
+      );
     if (step === "listen")
       return (
         <>
