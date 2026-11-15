@@ -26,3 +26,4 @@ web/public/models/
 .cursor/
 .vscode/
 .idea/
+ml/models/
