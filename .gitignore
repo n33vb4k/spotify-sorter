@@ -35,3 +35,4 @@ ml/models/
 .impeccable/config.local.json
 ml/*.log
 .playwright-mcp/
+/package-lock.json
