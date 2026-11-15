@@ -6,6 +6,7 @@ Commands:
   pull                      download top tracks, liked songs, playlists, recent plays -> data/
   create <plan.json>        create NEW playlists from a plan file
   add <playlist> <q>...     add liked songs to a playlist this script created
+  rename <mapping.json>     rename playlists this script created ({"old": "new"})
 
 Safety: this script never edits, reorders, removes from, or deletes existing
 playlists or liked songs. `create` only adds tracks to playlists it created
@@ -179,7 +180,7 @@ def create(plan_path):
     existing = {p["name"].lower() for p in json.load(open(os.path.join(DATA, "playlists.json")))}
     log_path = os.path.join(DATA, "created_playlists.json")
     log = json.load(open(log_path)) if os.path.exists(log_path) else []
-    created = {p["name"]: p["id"] for p in log}
+    created = _created_ids()
     for pl in plan:
         if pl.get("add_to_existing"):
             if pl["name"] not in created:
@@ -219,7 +220,7 @@ def _add_uris(pid, uris):
 
 def add(name, queries):
     """Add liked songs (matched by 'artist - title' substring) to a playlist THIS script created."""
-    created = {p["name"]: p["id"] for p in json.load(open(os.path.join(DATA, "created_playlists.json")))}
+    created = _created_ids()
     if name not in created:
         sys.exit(f"'{name}' was not created by this script - refusing to modify it")
     liked = json.load(open(os.path.join(DATA, "liked.json")))
@@ -232,6 +233,36 @@ def add(name, queries):
     print(f"Added {len(uris)} to '{name}'")
 
 
+def rename(mapping_path):
+    """mapping.json: {"current or original name": "new name"} - only for playlists this tool created."""
+    mapping = json.load(open(mapping_path))
+    log_path = os.path.join(DATA, "created_playlists.json")
+    log = json.load(open(log_path))
+    taken = {p["name"].lower() for p in json.load(open(os.path.join(DATA, "playlists.json"))) if p["mine"]}
+    for p in log:
+        new = mapping.get(p["name"]) or mapping.get(p.get("genre", ""))
+        if not new or new == p["name"]:
+            continue
+        if new.lower() in taken:
+            print(f"SKIP '{new}': you already have a playlist with that name"); continue
+        api("PUT", f"/playlists/{p['id']}", {"name": new})
+        p.setdefault("genre", p["name"])
+        print(f"'{p['name']}' -> '{new}'")
+        p["name"] = new
+        with open(log_path, "w") as f:
+            json.dump(log, f, indent=1, ensure_ascii=False)
+
+
+def _created_ids():
+    """name -> id for playlists this tool created; original genre names work too."""
+    ids = {}
+    for p in json.load(open(os.path.join(DATA, "created_playlists.json"))):
+        ids[p["name"]] = p["id"]
+        if p.get("genre"):
+            ids[p["genre"]] = p["id"]
+    return ids
+
+
 def save(name, obj):
     with open(os.path.join(DATA, name), "w") as f:
         json.dump(obj, f, indent=1, ensure_ascii=False)
@@ -242,5 +273,6 @@ if __name__ == "__main__":
     if cmd == "auth": auth()
     elif cmd == "pull": pull()
     elif cmd == "create" and len(sys.argv) == 3: create(sys.argv[2])
+    elif cmd == "rename" and len(sys.argv) == 3: rename(sys.argv[2])
     elif cmd == "add" and len(sys.argv) > 3: add(sys.argv[2], sys.argv[3:])
     else: print(__doc__)

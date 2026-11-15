@@ -47,6 +47,7 @@ python3 group.py rules.json --out plan.json   # turn tags + your rules into a pl
 .venv/bin/python analyze.py "Artist - Title" ...   # optional: BPM / swing / kick / sub-bass readout
 python3 spotify.py create plan.json     # create new playlists from a plan
 python3 spotify.py add "Playlist" "Artist - Title" ...
+python3 spotify.py rename names.json    # {"old name": "new name"}, tool-created playlists only
 ```
 
 A plan file is a list of `{"name", "description", "uris": [...], "add_to_existing": false}`.
