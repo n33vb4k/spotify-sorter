@@ -27,3 +27,12 @@ web/public/models/
 .vscode/
 .idea/
 ml/models/
+# impeccable runtime (surface briefs + PRODUCT.md are committed)
+.impeccable/review/
+.impeccable/mocks/
+.impeccable/questions/
+.impeccable/hook.cache.json
+.impeccable/config.local.json
+ml/*.log
+.playwright-mcp/
+/package-lock.json
