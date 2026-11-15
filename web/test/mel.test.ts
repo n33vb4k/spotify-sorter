@@ -26,7 +26,7 @@ describe("mel features (port of Essentia TensorflowInputMusiCNN)", () => {
   it("patch count matches", () => expect(toPatches(mel).count).toBe(fx.numPatches));
 });
 
-describe.skipIf(!existsSync(join(MODELS, "discogs-effnet-bsdynamic-1.onnx")))("ONNX tagger (needs scripts/fetch-models.sh ml/models)", () => {
+describe.skipIf(!existsSync(join(MODELS, "discogs-effnet-bsdynamic-1.onnx")))("ONNX tagger (needs web/scripts/fetch-models.sh ml/models)", () => {
   it("reproduces reference activations and mood", async () => {
     const labels = JSON.parse(readFileSync(join(MODELS, "discogs-effnet-bsdynamic-1.json"), "utf8")).classes;
     const tagger = await Tagger.create(ortNode as unknown as OrtLike, async (f) => readFileSync(join(MODELS, f)), labels, ["relaxed"]);

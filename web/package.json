@@ -9,7 +9,7 @@
     "lint": "eslint",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "models": "bash ../scripts/fetch-models.sh public/models"
+    "models": "bash scripts/fetch-models.sh public/models"
   },
   "dependencies": {
     "next": "16.4.6",

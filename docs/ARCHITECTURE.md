@@ -207,7 +207,7 @@ web/      Next.js app
   src/app/         page, /callback, /api/preview, /dev/parity (dev-only)
   src/components/  App shell, Stack (cabinets), TrackList, Panels, Player, SkipsPanel
   test/            Vitest: mel parity, grouping, colours, skips, rate limiting
-scripts/  fetch-models.sh (retrying download of the official models)
+  scripts/         fetch-models.sh (retrying download of the official models), copy-ort.mjs
 DESIGN.md / PRODUCT.md   design system and product brief
 ```
 
