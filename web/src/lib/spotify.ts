@@ -21,6 +21,15 @@ interface Token {
   access_token: string;
   refresh_token?: string;
   expires_at: number;
+  /** The Client ID this session was issued to; refreshes must use the same one. */
+  client_id?: string;
+}
+
+/** The saved Spotify sign-in can't be used or renewed any more; the user has to connect again. */
+export class SessionExpiredError extends Error {
+  constructor(detail?: string) {
+    super(`Your Spotify sign-in has expired${detail ? ` (${detail})` : ""}. Connect again; your tags are still saved in this browser.`);
+  }
 }
 
 const b64url = (bytes: Uint8Array) =>
@@ -50,19 +59,28 @@ export async function beginLogin(clientId: string) {
   window.location.assign(`https://accounts.spotify.com/authorize?${q}`);
 }
 
-async function tokenRequest(params: Record<string, string>): Promise<Token> {
-  const res = await fetch("https://accounts.spotify.com/api/token", {
+async function tokenRequest(params: Record<string, string>, fetchImpl: typeof fetch = fetch): Promise<Token> {
+  const res = await fetchImpl("https://accounts.spotify.com/api/token", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: new URLSearchParams(params),
   });
-  const body = await res.json();
-  if (!res.ok) throw new Error(body.error_description || body.error || `Spotify login failed (${res.status})`);
+  const body = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    // A refresh that Spotify refuses (revoked, rotated away, app changed) can't be retried: start over.
+    if (params.grant_type === "refresh_token" && (res.status === 400 || res.status === 401)) {
+      logout();
+      throw new SessionExpiredError(body.error_description || body.error);
+    }
+    throw new Error(body.error_description || body.error || `Spotify login failed (${res.status})`);
+  }
   const prev = loadToken();
   const tok: Token = {
     access_token: body.access_token,
+    // Spotify rotates refresh tokens for PKCE apps; keep the newest one.
     refresh_token: body.refresh_token ?? prev?.refresh_token,
     expires_at: Date.now() + (body.expires_in - 60) * 1000,
+    client_id: params.client_id,
   };
   localStorage.setItem(K.token, JSON.stringify(tok));
   return tok;
@@ -92,16 +110,44 @@ function loadToken(): Token | null {
   }
 }
 
-export const isLoggedIn = () => !!loadToken();
+/** A token is saved. It may still be expired or revoked: use checkSession() to know for sure. */
+export const hasSavedSession = () => !!loadToken();
 export const logout = () => localStorage.removeItem(K.token);
 export const forgetClientId = () => localStorage.removeItem(K.client);
 
-async function accessToken(): Promise<string> {
+let refreshing: Promise<string> | null = null;
+
+/** Current access token, refreshing it if needed. Concurrent callers share one refresh (tokens rotate). */
+async function accessToken(force = false, fetchImpl: typeof fetch = fetch): Promise<string> {
   const tok = loadToken();
-  if (!tok) throw new Error("Not connected to Spotify.");
-  if (Date.now() < tok.expires_at) return tok.access_token;
-  if (!tok.refresh_token) throw new Error("Your Spotify session expired. Connect again.");
-  return (await tokenRequest({ grant_type: "refresh_token", refresh_token: tok.refresh_token, client_id: getClientId() })).access_token;
+  if (!tok) throw new SessionExpiredError();
+  if (!force && Date.now() < tok.expires_at) return tok.access_token;
+  if (!tok.refresh_token) {
+    logout();
+    throw new SessionExpiredError();
+  }
+  refreshing ??= tokenRequest(
+    { grant_type: "refresh_token", refresh_token: tok.refresh_token, client_id: tok.client_id || getClientId() },
+    fetchImpl,
+  )
+    .then((t) => t.access_token)
+    .finally(() => {
+      refreshing = null;
+    });
+  return refreshing;
+}
+
+/** Confirms the saved sign-in still works (refreshing if needed). Never throws. */
+export async function checkSession(fetchImpl: typeof fetch = fetch): Promise<{ ok: true; name?: string } | { ok: false; reason?: string }> {
+  if (!loadToken()) return { ok: false };
+  try {
+    const user = await api<{ id: string; display_name?: string }>("GET", "/me", undefined, fetchImpl);
+    return { ok: true, name: user.display_name || user.id };
+  } catch (e) {
+    if (e instanceof SessionExpiredError) return { ok: false, reason: e.message };
+    // Offline or Spotify hiccup: keep the session, the next real call will tell.
+    return { ok: true };
+  }
 }
 
 /** Development-mode Spotify apps only work for accounts the app owner has added in the dashboard. */
@@ -124,12 +170,23 @@ export class RateLimitError extends Error {
 
 export async function api<T = unknown>(method: string, path: string, body?: unknown, fetchImpl: typeof fetch = fetch): Promise<T> {
   const url = path.startsWith("http") ? path : API + path;
+  let refreshedFor401 = false;
   for (let attempt = 0; attempt < 5; attempt++) {
     const res = await fetchImpl(url, {
       method,
-      headers: { Authorization: `Bearer ${await accessToken()}`, "Content-Type": "application/json" },
+      headers: { Authorization: `Bearer ${await accessToken(false, fetchImpl)}`, "Content-Type": "application/json" },
       body: body === undefined ? undefined : JSON.stringify(body),
     });
+    if (res.status === 401) {
+      // Access token rejected (expired early or revoked): refresh once and retry, otherwise start over.
+      if (!refreshedFor401) {
+        refreshedFor401 = true;
+        await accessToken(true, fetchImpl);
+        continue;
+      }
+      logout();
+      throw new SessionExpiredError();
+    }
     if (res.status === 429) {
       const wait = Number(res.headers.get("Retry-After") ?? 2);
       if (wait > 30) throw new RateLimitError(wait);
