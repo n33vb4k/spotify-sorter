@@ -1,9 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { Big_Shoulders_Stencil, Figtree } from "next/font/google";
+import { Figtree } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
 const body = Figtree({ subsets: ["latin"], variable: "--font-body", display: "swap" });
-const stencil = Big_Shoulders_Stencil({ subsets: ["latin"], variable: "--font-stencil", display: "swap", axes: ["opsz"] });
+// Self-hosted (SIL OFL): next/font/google has no fallback metrics for this face and warns on every compile.
+const stencil = localFont({
+  src: "./fonts/BigShouldersStencil-latin.woff2",
+  weight: "100 900",
+  variable: "--font-stencil",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "spotify-sorter: sort your liked songs by how they sound",
