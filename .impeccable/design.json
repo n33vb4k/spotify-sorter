@@ -1,0 +1,461 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-15T03:22:52.549852+00:00",
+  "title": "Design System: spotify-sorter",
+  "extensions": {
+    "colorMeta": {
+      "plywood-black": {
+        "role": "neutral",
+        "displayName": "Plywood Black",
+        "canonical": "oklch(0.155 0.008 65)",
+        "tonalRamp": [
+          "oklch(0.155 0.008 65)",
+          "oklch(0.19 0.009 65)",
+          "oklch(0.23 0.01 65)",
+          "oklch(0.3 0.011 65)",
+          "oklch(0.47 0.012 70)",
+          "oklch(0.74 0.013 75)",
+          "oklch(0.955 0.01 85)",
+          "oklch(0.985 0.006 85)"
+        ],
+        "purpose": "Page background; text on yellow."
+      },
+      "rail-black": {
+        "role": "neutral",
+        "displayName": "Rail Black",
+        "canonical": "oklch(0.19 0.009 65)",
+        "tonalRamp": [
+          "oklch(0.155 0.008 65)",
+          "oklch(0.19 0.009 65)",
+          "oklch(0.23 0.01 65)",
+          "oklch(0.3 0.011 65)",
+          "oklch(0.47 0.012 70)",
+          "oklch(0.74 0.013 75)",
+          "oklch(0.955 0.01 85)",
+          "oklch(0.985 0.006 85)"
+        ],
+        "purpose": "Rail, player, inputs, hovered rows."
+      },
+      "raised-black": {
+        "role": "neutral",
+        "displayName": "Raised Black",
+        "canonical": "oklch(0.23 0.01 65)",
+        "tonalRamp": [
+          "oklch(0.155 0.008 65)",
+          "oklch(0.19 0.009 65)",
+          "oklch(0.23 0.01 65)",
+          "oklch(0.3 0.011 65)",
+          "oklch(0.47 0.012 70)",
+          "oklch(0.74 0.013 75)",
+          "oklch(0.955 0.01 85)",
+          "oklch(0.985 0.006 85)"
+        ],
+        "purpose": "Chips, hover fills, dividers."
+      },
+      "edge-grey": {
+        "role": "neutral",
+        "displayName": "Edge Grey",
+        "canonical": "oklch(0.3 0.011 65)",
+        "tonalRamp": [
+          "oklch(0.155 0.008 65)",
+          "oklch(0.19 0.009 65)",
+          "oklch(0.23 0.01 65)",
+          "oklch(0.3 0.011 65)",
+          "oklch(0.47 0.012 70)",
+          "oklch(0.74 0.013 75)",
+          "oklch(0.955 0.01 85)",
+          "oklch(0.985 0.006 85)"
+        ],
+        "purpose": "Input borders, dashed outlines, leftovers cabinet."
+      },
+      "dust-grey": {
+        "role": "neutral",
+        "displayName": "Dust Grey",
+        "canonical": "oklch(0.47 0.012 70)",
+        "tonalRamp": [
+          "oklch(0.155 0.008 65)",
+          "oklch(0.19 0.009 65)",
+          "oklch(0.23 0.01 65)",
+          "oklch(0.3 0.011 65)",
+          "oklch(0.47 0.012 70)",
+          "oklch(0.74 0.013 75)",
+          "oklch(0.955 0.01 85)",
+          "oklch(0.985 0.006 85)"
+        ],
+        "purpose": "Outline-button border, disabled, strikethrough."
+      },
+      "ash": {
+        "role": "neutral",
+        "displayName": "Ash",
+        "canonical": "oklch(0.74 0.013 75)",
+        "tonalRamp": [
+          "oklch(0.155 0.008 65)",
+          "oklch(0.19 0.009 65)",
+          "oklch(0.23 0.01 65)",
+          "oklch(0.3 0.011 65)",
+          "oklch(0.47 0.012 70)",
+          "oklch(0.74 0.013 75)",
+          "oklch(0.955 0.01 85)",
+          "oklch(0.985 0.006 85)"
+        ],
+        "purpose": "Secondary text."
+      },
+      "chalk": {
+        "role": "neutral",
+        "displayName": "Chalk",
+        "canonical": "oklch(0.955 0.01 85)",
+        "tonalRamp": [
+          "oklch(0.155 0.008 65)",
+          "oklch(0.19 0.009 65)",
+          "oklch(0.23 0.01 65)",
+          "oklch(0.3 0.011 65)",
+          "oklch(0.47 0.012 70)",
+          "oklch(0.74 0.013 75)",
+          "oklch(0.955 0.01 85)",
+          "oklch(0.985 0.006 85)"
+        ],
+        "purpose": "Primary text, play button, selected outline."
+      },
+      "hazard-yellow": {
+        "role": "primary",
+        "displayName": "Hazard Yellow",
+        "canonical": "oklch(0.85 0.17 92)",
+        "tonalRamp": [
+          "oklch(0.15 0.081 92)",
+          "oklch(0.26 0.103 92)",
+          "oklch(0.37 0.124 92)",
+          "oklch(0.48 0.146 92)",
+          "oklch(0.6 0.17 92)",
+          "oklch(0.72 0.146 92)",
+          "oklch(0.84 0.122 92)",
+          "oklch(0.95 0.101 92)"
+        ],
+        "purpose": "Primary action, focus ring, caret, current step. Never decoration or status."
+      },
+      "hazard-press": {
+        "role": "primary",
+        "displayName": "Hazard Press",
+        "canonical": "oklch(0.78 0.16 90)",
+        "tonalRamp": [
+          "oklch(0.15 0.076 90)",
+          "oklch(0.26 0.097 90)",
+          "oklch(0.37 0.117 90)",
+          "oklch(0.48 0.138 90)",
+          "oklch(0.6 0.16 90)",
+          "oklch(0.72 0.138 90)",
+          "oklch(0.84 0.115 90)",
+          "oklch(0.95 0.095 90)"
+        ],
+        "purpose": "Hover/pressed primary button."
+      },
+      "alert-red": {
+        "role": "tertiary",
+        "displayName": "Alert Red",
+        "canonical": "oklch(0.68 0.17 32)",
+        "tonalRamp": [
+          "oklch(0.15 0.081 32)",
+          "oklch(0.26 0.103 32)",
+          "oklch(0.37 0.124 32)",
+          "oklch(0.48 0.146 32)",
+          "oklch(0.6 0.17 32)",
+          "oklch(0.72 0.146 32)",
+          "oklch(0.84 0.122 32)",
+          "oklch(0.95 0.101 32)"
+        ],
+        "purpose": "Invalid input and error text only."
+      }
+    },
+    "playlistPalette": {
+      "space": "oklch",
+      "entries": [
+        {
+          "hue": 25,
+          "lightness": 0.52
+        },
+        {
+          "hue": 150,
+          "lightness": 0.47
+        },
+        {
+          "hue": 205,
+          "lightness": 0.5
+        },
+        {
+          "hue": 270,
+          "lightness": 0.52
+        },
+        {
+          "hue": 325,
+          "lightness": 0.5
+        },
+        {
+          "hue": 45,
+          "lightness": 0.42
+        },
+        {
+          "hue": 175,
+          "lightness": 0.4
+        },
+        {
+          "hue": 235,
+          "lightness": 0.38
+        },
+        {
+          "hue": 295,
+          "lightness": 0.4
+        },
+        {
+          "hue": 0,
+          "lightness": 0.42
+        },
+        {
+          "hue": 345,
+          "lightness": 0.36
+        },
+        {
+          "hue": 190,
+          "lightness": 0.58
+        }
+      ],
+      "reservedHues": [
+        60,
+        130
+      ],
+      "familyDegrees": 40,
+      "leftovers": "edge-grey face, dust-grey swatch",
+      "derivations": {
+        "face": "oklch(L 0.12 H)",
+        "faceText": "oklch(0.97 0.03 H)",
+        "heading": "oklch(0.82 0.11 H)",
+        "aside": "oklch(0.85 0.08 H)",
+        "chipTop": "oklch(0.36 0.07 H)",
+        "chipPct": "oklch(0.85 0.05 H)",
+        "swatch": "oklch(L+0.08 0.13 H)"
+      },
+      "source": "web/src/lib/grouping.ts PALETTE, assignColours"
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Stencil Display",
+        "purpose": "Open cabinet heading and big numbers on Listen."
+      },
+      "brand": {
+        "displayName": "Wordmark",
+        "purpose": "Rail wordmark only."
+      },
+      "cabinet-label": {
+        "displayName": "Cabinet Label",
+        "purpose": "Name and count painted on cabinet faces; size is half the face height."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Stage heading, prose headings."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All reading text, tabular numerals."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Artists, hints, chips, captions, small buttons."
+      }
+    },
+    "shadows": [
+      {
+        "name": "cabinet-bevel",
+        "value": "inset 0 -2px 0 oklch(0 0 0 / 0.25), inset 0 1px 0 oklch(1 0 0 / 0.08)",
+        "purpose": "Moulded front panel on cabinet faces only."
+      },
+      {
+        "name": "stencil-lift",
+        "value": "text-shadow: 0 1px 0 oklch(0 0 0 / 0.35)",
+        "purpose": "Cabinet labels only."
+      },
+      {
+        "name": "focus-ring",
+        "value": "outline: 2px solid oklch(0.85 0.17 92); outline-offset: 2px",
+        "purpose": "Global :focus-visible."
+      }
+    ],
+    "textures": [
+      {
+        "name": "grille-dots",
+        "value": "radial-gradient(oklch(0 0 0 / 0.32) 1px, transparent 1.4px) 0 0 / 4px 4px",
+        "purpose": "Cabinet faces only."
+      }
+    ],
+    "motion": [
+      {
+        "name": "cabinet-step",
+        "value": "height 160ms cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "A cabinet grows by one unit per tagged song. The only content motion."
+      },
+      {
+        "name": "control-feedback",
+        "value": "background-color 120ms, border-color 120ms, filter 120ms",
+        "purpose": "Button and cabinet hover feedback."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "0ms",
+        "purpose": "prefers-reduced-motion makes every transition instant."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "compact",
+        "value": "900px",
+        "purpose": "Below: one-column shell, rail becomes a horizontal step strip, panes stack, scrubber hidden."
+      }
+    ],
+    "layout": {
+      "rail": "232px",
+      "player": "72px",
+      "stageSplit": "minmax(280px, 2fr) 3fr",
+      "grid": "4px",
+      "stackGap": "3px"
+    }
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one hazard-yellow action per view, top right of the stage.",
+      "html": "<button class=\"ds-btn-primary\">Create 9 playlists</button>",
+      "css": ".ds-btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 20px;border-radius:999px;font-family:Figtree,ui-sans-serif,sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:background-color 120ms,border-color 120ms;background:oklch(0.85 0.17 92);border:1.5px solid oklch(0.85 0.17 92);color:oklch(0.155 0.008 65)}.ds-btn-primary:hover{background:oklch(0.78 0.16 90);border-color:oklch(0.78 0.16 90)}.ds-btn-primary:active{filter:brightness(0.9)}.ds-btn-primary:focus-visible{outline:2px solid oklch(0.85 0.17 92);outline-offset:2px}"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Default secondary action.",
+      "html": "<button class=\"ds-btn\">Try the demo</button>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 20px;border-radius:999px;font-family:Figtree,ui-sans-serif,sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:background-color 120ms,border-color 120ms;background:none;border:1.5px solid oklch(0.47 0.012 70);color:oklch(0.955 0.01 85)}.ds-btn:hover{border-color:oklch(0.955 0.01 85)}.ds-btn:active{filter:brightness(0.9)}.ds-btn:focus-visible{outline:2px solid oklch(0.85 0.17 92);outline-offset:2px}"
+    },
+    {
+      "name": "Quiet Button",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "Borderless tertiary action.",
+      "html": "<button class=\"ds-btn-quiet\">Restore</button>",
+      "css": ".ds-btn-quiet{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 20px;border-radius:999px;font-family:Figtree,ui-sans-serif,sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:background-color 120ms,border-color 120ms;padding:0 12px;background:none;border:1.5px solid transparent;color:oklch(0.74 0.013 75)}.ds-btn-quiet:hover{background:oklch(0.23 0.01 65);color:oklch(0.955 0.01 85)}.ds-btn-quiet:focus-visible{outline:2px solid oklch(0.85 0.17 92);outline-offset:2px}"
+    },
+    {
+      "name": "Client ID Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Monospace text field with hazard caret and focus border.",
+      "html": "<input class=\"ds-input\" placeholder=\"Paste your Client ID\">",
+      "css": ".ds-input{height:44px;width:280px;padding:0 14px;border-radius:6px;border:1.5px solid oklch(0.3 0.011 65);background:oklch(0.19 0.009 65);color:oklch(0.955 0.01 85);font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:15px;letter-spacing:0.02em;caret-color:oklch(0.85 0.17 92)}.ds-input::placeholder{color:oklch(0.74 0.013 75)}.ds-input:hover{border-color:oklch(0.47 0.012 70)}.ds-input:focus-visible{outline:none;border-color:oklch(0.85 0.17 92)}"
+    },
+    {
+      "name": "Style Chips",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Top styles on a track row; the top one tinted by its playlist hue.",
+      "html": "<span style=\"display:flex;gap:6px\"><button class=\"ds-chip top\" style=\"--h:325\">Bassline <span class=\"pct\">71%</span></button><button class=\"ds-chip\">UK Garage <span class=\"pct\">12%</span></button></span>",
+      "css": ".ds-chip{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 8px;border:0;border-radius:999px;background:oklch(0.23 0.01 65);color:oklch(0.955 0.01 85);font-family:Figtree,sans-serif;font-size:13px;font-weight:600;cursor:pointer}.ds-chip:hover{filter:brightness(1.2)}.ds-chip:focus-visible{outline:2px solid oklch(0.85 0.17 92);outline-offset:2px}.ds-chip .pct{color:oklch(0.74 0.013 75);font-weight:500}.ds-chip.top{background:oklch(0.36 0.07 var(--h))}.ds-chip.top .pct{color:oklch(0.85 0.05 var(--h))}"
+    },
+    {
+      "name": "Rail Steps",
+      "kind": "nav",
+      "refersTo": "",
+      "description": "Five-step rail; current dot in hazard, done dots in ash.",
+      "html": "<ol class=\"ds-steps\"><li><button class=\"ds-step done\"><span class=\"dot\"><svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\"><path d=\"M5 12.5l4.5 4.5L19 7.5\"/></svg></span>Connect</button></li><li><button class=\"ds-step done\"><span class=\"dot\"><svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\"><path d=\"M5 12.5l4.5 4.5L19 7.5\"/></svg></span>Scan</button></li><li><button class=\"ds-step\" aria-current=\"step\"><span class=\"dot\">3</span>Listen</button></li><li><button class=\"ds-step\" disabled><span class=\"dot\">4</span>Review</button></li></ol>",
+      "css": ".ds-steps{list-style:none;margin:0;padding:12px;display:grid;gap:2px;width:232px;background:oklch(0.19 0.009 65)}.ds-step{display:flex;align-items:center;gap:12px;width:100%;padding:10px 12px;border:0;border-radius:6px;background:none;color:oklch(0.74 0.013 75);font-family:Figtree,sans-serif;font-size:15px;font-weight:600;text-align:left;cursor:pointer}.ds-step:hover:not(:disabled),.ds-step[aria-current=step]{background:oklch(0.23 0.01 65);color:oklch(0.955 0.01 85)}.ds-step:disabled{color:oklch(0.47 0.012 70);cursor:default}.ds-step .dot{width:20px;height:20px;display:grid;place-items:center;border-radius:50%;border:1.5px solid currentColor;font-size:11px}.ds-step[aria-current=step] .dot{background:oklch(0.85 0.17 92);border-color:oklch(0.85 0.17 92);color:oklch(0.155 0.008 65)}.ds-step.done .dot{background:oklch(0.74 0.013 75);border-color:oklch(0.74 0.013 75);color:oklch(0.19 0.009 65)}.ds-step:focus-visible{outline:2px solid oklch(0.85 0.17 92);outline-offset:2px}"
+    },
+    {
+      "name": "Track Row",
+      "kind": "custom",
+      "refersTo": "track-row",
+      "description": "Play button, title/artist, hue swatch; left-out rows stay visible, struck through.",
+      "html": "<ul class=\"ds-tracks\"><li class=\"ds-trow\"><button class=\"play\" aria-label=\"Play\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\"><path d=\"M8 5.5v13l10-6.5-10-6.5z\" fill=\"currentColor\"/></svg></button><div><div class=\"t\">Song title</div><div class=\"a\">Artist name</div></div></li><li class=\"ds-trow out\"><button class=\"play\" aria-label=\"Play\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\"><path d=\"M8 5.5v13l10-6.5-10-6.5z\" fill=\"currentColor\"/></svg></button><div><div class=\"t\">Left-out song</div><div class=\"a\">Artist name</div></div></li></ul>",
+      "css": ".ds-tracks{list-style:none;margin:0;padding:0;width:360px;font-family:Figtree,sans-serif}.ds-trow{display:grid;grid-template-columns:32px 1fr;gap:4px 12px;align-items:center;padding:10px 8px;border-radius:6px}.ds-trow+.ds-trow{border-top:1px solid oklch(0.19 0.009 65)}.ds-trow:hover{background:oklch(0.19 0.009 65)}.ds-trow .play{width:32px;height:32px;border-radius:50%;border:0;background:none;color:oklch(0.74 0.013 75);display:grid;place-items:center;cursor:pointer}.ds-trow .play:hover{background:oklch(0.955 0.01 85);color:oklch(0.155 0.008 65)}.ds-trow .play:focus-visible{outline:2px solid oklch(0.85 0.17 92);outline-offset:2px}.ds-trow .t{font-weight:600;color:oklch(0.955 0.01 85)}.ds-trow .a{font-size:13px;color:oklch(0.74 0.013 75)}.ds-trow.out .t,.ds-trow.out .a{color:oklch(0.47 0.012 70);text-decoration:line-through}"
+    },
+    {
+      "name": "Cabinet Stack",
+      "kind": "custom",
+      "refersTo": "cabinet",
+      "description": "Signature: playlists as grille-dotted cabinets, height exactly proportional to song count; short faces carry their label beside them.",
+      "html": "<ul class=\"ds-stack\"><li class=\"ds-cab-row\" style=\"--h:325;--l:0.5\"><button class=\"ds-cab\" aria-pressed=\"true\" style=\"height:96px;font-size:44px\"><span>Bassline &amp; 140</span><span>48</span></button></li><li class=\"ds-cab-row\" style=\"--h:150;--l:0.47\"><button class=\"ds-cab\" style=\"height:64px;font-size:32px\"><span>UK Garage</span><span>32</span></button></li><li class=\"ds-cab-row\" style=\"--h:25;--l:0.52\"><button class=\"ds-cab\" style=\"height:36px;font-size:18px\"><span>Drum &amp; Bass</span><span>18</span></button></li><li class=\"ds-cab-row short\" style=\"--h:205;--l:0.5\"><button class=\"ds-cab\" style=\"height:12px\"></button><span class=\"ds-aside\">House &amp; Techno 6</span></li></ul>",
+      "css": ".ds-stack{list-style:none;margin:0;padding:0;display:flex;flex-direction:column-reverse;gap:3px;width:280px;background:var(--k0,oklch(0.155 0.008 65));padding:12px}.ds-cab{display:flex;align-items:flex-end;justify-content:space-between;gap:8px;width:100%;padding:4px 10px;border:0;border-radius:4px;background-color:oklch(var(--l) 0.12 var(--h));background-image:radial-gradient(oklch(0 0 0 / 0.32) 1px,transparent 1.4px);background-size:4px 4px;box-shadow:inset 0 -2px 0 oklch(0 0 0 / 0.25),inset 0 1px 0 oklch(1 0 0 / 0.08);color:oklch(0.97 0.03 var(--h));font-family:'Big Shoulders Stencil',sans-serif;font-weight:800;line-height:1;text-shadow:0 1px 0 oklch(0 0 0 / 0.35);cursor:pointer;transition:height 160ms cubic-bezier(0.16,1,0.3,1),filter 120ms;overflow:hidden}.ds-cab:hover{filter:brightness(1.12)}.ds-cab:focus-visible{outline:2px solid oklch(0.85 0.17 92);outline-offset:2px}.ds-cab[aria-pressed=true]{outline:2px solid oklch(0.955 0.01 85);outline-offset:2px;filter:brightness(1.18)}.ds-cab-row{display:flex;align-items:center;gap:10px}.ds-cab-row.short .ds-cab{flex:0 0 62%}.ds-aside{font-family:'Big Shoulders Stencil',sans-serif;font-weight:800;font-size:15px;line-height:1;color:oklch(0.85 0.08 var(--h))}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Sound-System Stack",
+    "overview": "The library is a UK bass-culture speaker stack. Every proposed playlist is a cabinet: a matte, grille-dotted face in its own hue, stencilled with its name and song count, stacked bottom-up with the biggest at the base. The stack is a measuring instrument before it is a picture: a cabinet's height is its song count times one fixed unit, so the visitor sizes up their own music at a glance and opens a cabinet to see what is inside.\n\nEverything around the stack is a working tool in warm plywood black: a left rail of five steps, a stage with the stack beside the open cabinet's track list, and a player bar along the bottom. The surround is quiet on purpose: one seven-step neutral ramp, one hazard yellow that only ever means \"do this\", and Figtree for every word that is not painted on a cabinet. Density is that of a tool, not a poster: 15px body, tabular numerals, rows rather than cards.\n\nThe world refuses the category default of a grey sidebar, a green accent and a flat table of playlists, and it never imitates Spotify's branding or logo.",
+    "keyCharacteristics": [
+      "Warm matte black surround built from exactly seven neutral steps.",
+      "Hazard yellow is the action colour and nothing else.",
+      "One OKLCH hue per playlist, tinting its cabinet, chips, swatches and heading.",
+      "Stencil lettering only where a label is painted on equipment: cabinets, counts, the list heading, big numbers, the wordmark.",
+      "Cabinet height exactly proportional to song count; motion is a height step and nothing else."
+    ],
+    "rules": [
+      {
+        "name": "The Seven Steps Rule",
+        "body": "The k0–k6 ramp is the only neutral set. A new grey is a new step nobody agreed to; use the nearest of the seven.",
+        "section": "colors"
+      },
+      {
+        "name": "The Hazard Rule",
+        "body": "Hazard yellow marks what to do next: the primary action, focus, the caret, the current step. It is never a decoration, a playlist colour or a status tint.",
+        "section": "colors"
+      },
+      {
+        "name": "The Reserved Yellows Rule",
+        "body": "OKLCH hues 60–130 (yellows and yellow-greens) never go on a playlist, so no cabinet can be mistaken for a button.",
+        "section": "colors"
+      },
+      {
+        "name": "The Fixed Colour Rule",
+        "body": "A playlist keeps its colour for the whole session. Colours are assigned in rule order, not stack position, and once shown they are held, so re-sorting the stack never repaints a cabinet. When a playlist's preferred colour family (hues within 40°) is taken, it moves to the free slot furthest from the rest.",
+        "section": "colors"
+      },
+      {
+        "name": "The Painted-On Rule",
+        "body": "Stencil appears only where a label would be painted onto equipment: cabinet names and counts, the open cabinet's heading, big numbers, the wordmark. Body copy, buttons, rail steps and track titles are always Figtree.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular Rule",
+        "body": "Numerals are tabular throughout (font-variant-numeric: tabular-nums on body), so counts and timers do not jitter as they change.",
+        "section": "typography"
+      },
+      {
+        "name": "The Exact Height Rule",
+        "body": "A cabinet's face is songs × unit pixels, never rounded for looks. The unit is 560 / total songs, clamped to 2–8px (halved in compact stacks). When a face is shorter than 22px, its label moves beside the cabinet (the face shrinks to 62% width) rather than the cabinet growing to fit it.",
+        "section": "layout"
+      },
+      {
+        "name": "The Grille Rule",
+        "body": "The grille-dot texture (radial-gradient(oklch(0 0 0 / 0.32) 1px, transparent 1.4px) at 4px × 4px) appears only on cabinet faces. Nothing else in the app has texture.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do take every neutral from the k0–k6 ramp and every playlist colour from the OKLCH [hue, lightness] palette.",
+      "Do keep hazard yellow for the one primary action, focus, caret and current step.",
+      "Do size cabinets exactly by song count (`songs × unit`) and move the label beside any face under 22px.",
+      "Do keep a playlist's colour fixed for the session, assigned in rule order.",
+      "Do set cabinet names, counts, the open-cabinet heading and big numbers in Big Shoulders Stencil 800; everything else in Figtree with tabular numerals.",
+      "Do snap spacing to the 4px grid (4–32px).",
+      "Do animate only height steps (160ms ease-out) and honour reduced motion with instant changes.",
+      "Do keep removed songs visible, struck through and restorable."
+    ],
+    "donts": [
+      "Don't give a playlist a hue between 60 and 130; those yellows belong to actions.",
+      "Don't use hazard yellow as decoration, a playlist colour or a status tint.",
+      "Don't put the grille texture or the cabinet bevel on anything but a cabinet face.",
+      "Don't set buttons, body copy, rail steps or track titles in the stencil face.",
+      "Don't fade content in or out, or animate anything other than a cabinet's height.",
+      "Don't round cabinet heights up for looks or give short cabinets a minimum height.",
+      "Don't imitate Spotify's green, logo or branding, and don't fall back to a grey sidebar with a flat playlist table.",
+      "Don't use drop shadows for elevation; step up the black ramp instead."
+    ],
+    "openIssues": [
+      "With more than about seven playlists in one stack, some cabinets can share a colour family: outside the reserved yellows the palette holds about nine distinguishable families (12 slots, several within 40° of each other), so the fallback picks the furthest free slot rather than a distinct family."
+    ]
+  }
+}

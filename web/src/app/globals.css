@@ -831,7 +831,7 @@ button.chip:hover {
   font-weight: 700;
 }
 .manifest .st.created {
-  color: var(--hazard);
+  color: var(--k6);
 }
 .manifest .st.skipped {
   color: var(--k5);
